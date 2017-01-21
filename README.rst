@@ -6,5 +6,5 @@ To update BootsOnTheGround:
 ::
 
     git subtree pull --prefix external/BootsOnTheGround
-        https://github.com/wawiesel/Testing123.git
+        https://github.com/wawiesel/BootsOnTheGround.git
         develop --squash
