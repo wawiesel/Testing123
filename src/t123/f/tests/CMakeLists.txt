@@ -1,0 +1,1 @@
+ADD_FORTRAN_TEST( tstTesting123.f90 )
