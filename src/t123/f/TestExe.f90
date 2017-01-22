@@ -1,8 +1,8 @@
-module testing_Testing123_M
+module t123_TestExe_M
   use ISO_C_BINDING
   ! UnitTest -- highest level singleton modeled by this module
   !     TestCase -- a set of related tests
-  !         Test -- a single test (modeled by testing_RUN_ONE_TEST)
+  !         Test -- a single test (modeled by t123_RUN_ONE_TEST)
   ! The macros
   !
   ! TEST(TestCaseName,TestName)
@@ -31,28 +31,41 @@ module testing_Testing123_M
      end function func
   end interface
 
-  type testing_RUN_ONE_TEST
+  type t123_RUN_ONE_TEST
      !procedure (func), pointer, nopass :: O_P  => NULL()
      character(256) :: O_Q,O_R
      !test pointer to C wrapper here
   end type
 
-  type (testing_RUN_ONE_TEST), dimension (99999),save :: O_A
+  type (t123_RUN_ONE_TEST), dimension (99999),save :: O_A
 
   integer,save :: O_N=0
-  integer,save :: testing_RETURN_CODE=0
+  integer,save :: t123_RETURN_CODE=0
 
     interface
-        subroutine testing_Testing123_c_AddTestPartResult(file,line)&
-            BIND(C,name="testing_Testing123_c_AddTestPartResult")
+        subroutine t123_TestExe_c_init()&
+            BIND(C,name="t123_TestExe_c_init")
+        end subroutine
+        subroutine t123_TestExe_c_addTestPartResult(file,line)&
+            BIND(C,name="t123_TestExe_c_addTestPartResult")
             character(1),intent(in) :: file
             integer, intent(in)          :: line
         end subroutine
+        subroutine t123_TestExe_c_addTest(file,line,test_case_name,test_name)&
+            BIND(C,name="t123_TestExe_c_addTest")
+            character(1),intent(in) :: file
+            integer, intent(in)     :: line
+            character(1),intent(in) :: test_case_name
+            character(1),intent(in) :: test_name
+        end subroutine
+        integer function t123_TestExe_c_run()&
+            BIND(C,name="t123_TestExe_c_run")
+        end function
     end interface
 
 contains
 
-logical function testing_AddTestPart(fileName,fileLine,refVariable,testVariable,equality) result(compare)
+logical function t123_addTestPart(fileName,fileLine,refVariable,testVariable,equality) result(compare)
 character(*),intent(in) :: fileName
 integer,intent(in) :: fileLine
 character(*),intent(in) :: refVariable,testVariable
@@ -62,11 +75,15 @@ write(*,*)"refVariable=",refVariable
 write(*,*)"testVariable=",testVariable
 write(*,*)"equality=",equality
 
-call testing_Testing123_c_AddTestPartResult(fileName//C_NULL_CHAR,fileLine)
+call t123_TestExe_c_addTestPartResult(fileName//C_NULL_CHAR,fileLine)
 compare = equality
 end function
 
-subroutine testing_RUN_ALL()
+subroutine t123_init()
+!call t123_TestExe_c_init()
+end subroutine
+
+subroutine t123_run_all_tests()
 integer :: i,o
 
 do i=1,O_N

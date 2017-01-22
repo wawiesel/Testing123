@@ -1,6 +1,6 @@
-module tstTesting123_M
+module tstTestExe_M
 
-#include "t123/f/Testing123.inc.f90"
+#include "t123/f/TestExe.inc.f90"
 
 implicit none
 
@@ -27,7 +27,7 @@ END_TEST
 end module
 
 program main
-use tstTesting123_M
+use tstTestExe_M
 !
 RUN_ALL_TESTS()
 !

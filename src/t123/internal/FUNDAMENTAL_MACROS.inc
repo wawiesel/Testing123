@@ -1,5 +1,5 @@
-#ifndef _M_Testing123_internal_MACROS_H
-#define _M_Testing123_internal_MACROS_H
+#ifndef _M_TestExe_internal_MACROS_H
+#define _M_TestExe_internal_MACROS_H
 
 #define _M_CAT(a, ...) _M_PRIMITIVE_CAT(a, __VA_ARGS__)
 #define _M_PRIMITIVE_CAT(a, ...) a ## __VA_ARGS__

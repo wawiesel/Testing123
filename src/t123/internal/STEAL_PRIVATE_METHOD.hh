@@ -1,5 +1,5 @@
-#ifndef Testing123_STEAL_PRIVATE_METHOD_H
-#define Testing123_STEAL_PRIVATE_METHOD_H
+#ifndef TestExe_STEAL_PRIVATE_METHOD_H
+#define TestExe_STEAL_PRIVATE_METHOD_H
 
 //I stole this from:
 //http://bloglitb.blogspot.com/2010/07/access-to-private-members-thats-easy.html

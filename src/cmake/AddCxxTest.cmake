@@ -9,6 +9,6 @@ FUNCTION( ADD_CXX_TEST )
       ${test_file}
     ${args}
   )
-  #TARGET_LINK_LIBRARIES( ${PACKAGE_NAME}_${test_file_we} Testing123 )
+  #TARGET_LINK_LIBRARIES( ${PACKAGE_NAME}_${test_file_we} TestExe )
 
 ENDFUNCTION()

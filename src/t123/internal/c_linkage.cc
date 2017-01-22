@@ -1,35 +1,25 @@
 #include "c_linkage.h"
-#include <gtest/gtest.h>
-#include "STEAL_PRIVATE_METHOD.hh"
+#include "t123/TestExe.hh"
 
-// Note this file must be treated like C++!
-
-// Anonymous namespace for unspeakable acts of evil.
-namespace {
-    M_STEAL_PRIVATE_METHOD(
-        ::testing::UnitTest,
-        AddTestPartResult,
-        ::testing::TestPartResult::Type,
-        const char *,
-        int,
-        const std::string &,
-        const std::string &
-    );
-}
-
-// Binding for adding a test part result.
-void testing_Testing123_c_AddTestPartResult(const char* file, int line)
+void t123_TestExe_c_addTestPartResult(const char* file, int line)
 {
-    M_CALL_STOLEN_METHOD(
-        *::testing::UnitTest::GetInstance(),
-        AddTestPartResult
-    )
-    (
-        ::testing::TestPartResult::kSuccess,
-        file,  // No info about the source file where the exception occurred.
-        line,    // We have no info on which line caused the exception.
-        "",
-        ""     // No stack trace, either.
-    );
+    t123::TestExe::addTestPartResult(file,line);
 }
 
+void t123_TestExe_c_addTest(const char* file, int line,
+    const char* test_case_name,
+    const char* test_name)
+{
+    t123::TestExe::addTest(file,line,test_case_name,test_name);
+}
+
+void t123_TestExe_c_init(int argc, char **argv)
+{
+    t123::TestExe::init(argc,argv);
+
+}
+
+int t123_TestExe_c_finish()
+{
+    return t123::TestExe::finish();
+}

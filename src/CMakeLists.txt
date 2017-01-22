@@ -6,7 +6,7 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 
 # Set C++ sources.
 SET(CXX_SOURCES
-    t123/Testing123.cc
+    t123/TestExe.cc
     t123/internal/cxx_unit_test_main.cc
     t123/internal/c_linkage.cc
 )
@@ -15,7 +15,7 @@ SET(SOURCES ${CXX_SOURCES})
 
 # Install CXX headers.
 SET(CXX_HEADERS
-    t123/Testing123.hh
+    t123/TestExe.hh
     t123/internal/c_linkage.h
 )
 INSTALL(FILES ${CXX_HEADERS} DESTINATION "include/t123/")
@@ -43,7 +43,7 @@ IF(${PROJECT_NAME}_ENABLE_Fortran)
 
     # Set Fortran sources.
     SET(F_SOURCES
-        t123/f/Testing123.f90
+        t123/f/TestExe.f90
     )
 
     # Configure test header.
@@ -53,7 +53,7 @@ IF(${PROJECT_NAME}_ENABLE_Fortran)
         FUNDAMENTAL_MACROS_INC
     )
     CONFIGURE_FILE(
-        t123/f/Testing123.inc.f90 ${CMAKE_CURRENT_BINARY_DIR}/t123/f/Testing123.inc.f90
+        t123/f/TestExe.inc.f90 ${CMAKE_CURRENT_BINARY_DIR}/t123/f/TestExe.inc.f90
     )
 
     # Add special unit test creation command.
@@ -65,7 +65,7 @@ IF(${PROJECT_NAME}_ENABLE_Fortran)
         SOURCES
             ${F_SOURCES}
     )
-    #TARGET_LINK_LIBRARIES( Testing123_f Testing123 )
+    #TARGET_LINK_LIBRARIES( TestExe_f TestExe )
 
     # Add this package's Fortran test directory.
     TRIBITS_ADD_TEST_DIRECTORIES( t123/f/tests )

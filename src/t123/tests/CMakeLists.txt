@@ -1,1 +1,1 @@
-ADD_CXX_TEST( tstTesting123.cc )
+ADD_CXX_TEST( tstTestExe.cc )
