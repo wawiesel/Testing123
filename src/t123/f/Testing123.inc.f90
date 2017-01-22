@@ -1,6 +1,6 @@
 !This file is to be INCLUDED in a test file.
 !
-!#include "testing/f/Testing123.inc.f90"
+!#include "t123/f/Testing123.inc.f90"
 !
 !It uses the Testing123 module which contains
 !Fortran data structures for the test excecutation, as
@@ -29,4 +29,4 @@ O_A(O_N) % O_R = #B;;;
 _M_EVAL(_M_REPEAT(__COUNTER__, _M_LOOP, ~))\
 call testing_RUN_ALL()
 
-#define EXPECT_EQ(ref,test) if( .not.testing_addTestPart(__FILE__,__LINE__,#ref,ref,#test,test,ref==test) )write(6,'(a)',advance='no')
+#define EXPECT_EQ(ref,test) if( .not.testing_addTestPart(__FILE__,__LINE__,#ref,#test,ref==test) )write(6,'(a)',advance='no')

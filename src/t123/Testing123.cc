@@ -3,11 +3,11 @@
 
 namespace testing {
 
-    //static
-    void Testing123::init(int argc, char **argv)
-    {
-        testing::InitGoogleTest(&argc, argv);
-    }
+//static
+void Testing123::init(int argc, char **argv)
+{
+    testing::InitGoogleTest(&argc, argv);
+}
 
 }
 

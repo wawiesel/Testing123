@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-void testing_Testing123_c_AddTestPartResult();
+void testing_Testing123_c_AddTestPartResult(const char*, int);
 
 #ifdef __cplusplus
 }

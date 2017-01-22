@@ -1,4 +1,5 @@
 module testing_Testing123_M
+  use ISO_C_BINDING
   ! UnitTest -- highest level singleton modeled by this module
   !     TestCase -- a set of related tests
   !         Test -- a single test (modeled by testing_RUN_ONE_TEST)
@@ -42,22 +43,27 @@ module testing_Testing123_M
   integer,save :: testing_RETURN_CODE=0
 
     interface
-        subroutine testing_Testing123_c_AddTestPartResult()&
-        BIND(C,name="testing_Testing123_c_AddTestPartResult")
+        subroutine testing_Testing123_c_AddTestPartResult(file,line)&
+            BIND(C,name="testing_Testing123_c_AddTestPartResult")
+            character(1),intent(in) :: file
+            integer, intent(in)          :: line
         end subroutine
     end interface
 
-
 contains
 
-logical function testing_AddTestPart(fileName,fileLine,refVariable,refValue,testVariable,testValue,testCompare) result(compare)
+logical function testing_AddTestPart(fileName,fileLine,refVariable,testVariable,equality) result(compare)
 character(*),intent(in) :: fileName
 integer,intent(in) :: fileLine
 character(*),intent(in) :: refVariable,testVariable
-real(8),intent(in) :: refValue, testValue
-logical,intent(in) :: testCompare
-call testing_Testing123_c_AddTestPartResult()
-compare = testCompare
+logical,intent(in) :: equality
+
+write(*,*)"refVariable=",refVariable
+write(*,*)"testVariable=",testVariable
+write(*,*)"equality=",equality
+
+call testing_Testing123_c_AddTestPartResult(fileName//C_NULL_CHAR,fileLine)
+compare = equality
 end function
 
 subroutine testing_RUN_ALL()
@@ -66,6 +72,7 @@ integer :: i,o
 do i=1,O_N
     write(*,*)'Test',i,': ',trim(O_A(i)%O_Q),".",trim(O_A(i)%O_R)
 end do
+
 end subroutine
 
 
