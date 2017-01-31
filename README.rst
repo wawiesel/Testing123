@@ -1,10 +1,10 @@
 Testing123
 ----------
 
-CMake-enabled unit testing for C++ and Fortran
-
 .. image:: https://travis-ci.org/wawiesel/Testing123.svg?branch=master
     :target: https://travis-ci.org/wawiesel/Testing123
+
+CMake-enabled unit testing for C++ and Fortran
 
 The main purpose of this unit testing package is to extend the beautiful
 GoogleTest C++ unit test framework for scientific computing purposes.
@@ -30,14 +30,15 @@ enabled and the Fortran support has basically only been shown for the
 ``EXPECT_EQ`` macro.
 
 - Enable MPI (starts with BootsOnTheGround)
-- Other ``EXPECT_*`` macros like ``EXPECT_LE, EXPECT_LT, ...`
+- Other ``EXPECT_*`` macros like ``EXPECT_LE, EXPECT_LT, ...``
 - Fix ``ASSERT_*`` macros to halt program.
 - Document how exactly Fortran was hacked (it's a good story).
 - Extend macro definitions to handle more than 10 test cases.
 - Fix Fortran literal strings with double quotes. ``EXPECT_EQ("a","a")``
-  bombs because the C preprocessor does ``"a"-->"\"a\""`` and Fortran does
-  not understand that kind of escape ``\"`` instead preferring ``""``. The
-  workaround is just to use single quotes, ``EXPECT_EQ('a','a')``.
+  bombs because the C preprocessor converts ``"a"`` to ``"\"a\""`` but Fortran does
+  not understand that kind of escape ``\"`` instead using ``""``. The
+  workaround is just to use single quotes in string literals in the
+  macros, ``EXPECT_EQ('a','a')``.
 
 Embedded Packages
 -----------------
@@ -75,8 +76,9 @@ the strategy in Testing123's CMakeLists.txt file.
 The first include handles all the TriBITS setup and everything else. If built
 as a **project**, then the ConfigureProject command is executed first, then
 the ConfigurePackage command (ConfigureSuperPackage is also available). If you
-were to include Testing123 as an external package in a pure project, then
-your CMakeLists.txt would look like:
+were to include Testing123 as an external package in a pure project 
+(I would recommend at ``external/Testing123``, then your CMakeLists.txt 
+would look like:
 
 .. code-block:: cmake
 
@@ -86,7 +88,7 @@ your CMakeLists.txt would look like:
 
     BOTG_ConfigureProject( "${CMAKE_CURRENT_LIST_DIR}" )
 
-and your PackagesList.cmake would look something like:
+and your TriBITS PackagesList.cmake would look something like:
 
 .. code-block:: cmake
 
