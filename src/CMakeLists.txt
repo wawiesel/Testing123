@@ -2,7 +2,7 @@
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
 # Declare expected header path.
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_LIST_DIR})
 
 # Set C++ sources.
 SET(CXX_SOURCES
@@ -52,9 +52,11 @@ IF(${PROJECT_NAME}_ENABLE_Fortran)
         t123/internal/FUNDAMENTAL_MACROS.inc
         FUNDAMENTAL_MACROS_INC
     )
+    SET(F_HEADER "${CMAKE_CURRENT_BINARY_DIR}/t123/f/TestExe.inc.f90")
     CONFIGURE_FILE(
-        t123/f/TestExe.inc.f90 ${CMAKE_CURRENT_BINARY_DIR}/t123/f/TestExe.inc.f90
+        t123/f/TestExe.inc.f90 "${F_HEADER}"
     )
+    INSTALL(FILES ${F_HEADER} DESTINATION "include/t123/f/")
 
     # Add special unit test creation command.
     INCLUDE( cmake/AddFortranTest.cmake )
