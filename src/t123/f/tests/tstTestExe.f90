@@ -6,24 +6,27 @@ implicit none
 
 contains
 
-TEST(Case1,A)
+! Test basic expect on scalar values: string, int, double, float.
+TEST( Expect, Scalars )
 
-!WRITE(*,*)"line=",__LINE__
-EXPECT_EQ(1.d0,1.d0)
-
+    ! Reference value first, test value second.
+    EXPECT_EQ( 700, 700 );
+    EXPECT_EQ( '700', '700' );
+    !EXPECT_LT( 1, 2 );
+    !EXPECT_GT( 4.1, 3.5 );
+    !EXPECT_NE( 0, 1e-19 );
+    !EXPECT_NE( "", "done" );
+    !EXPECT_LE( 1, 1 );
+    !EXPECT_GE( 4.1, 3.5 );
 END_TEST
 
-TEST(Case1,B)
+TEST( Demo, Calcs )
+    real(C_DOUBLE) :: a,b
 
-EXPECT_EQ(1.d0,1.d0)
-
-END_TEST
-
-TEST(Case2,A)
-real(C_DOUBLE) :: a,b
-a=1.d0
-b=2.d0
-EXPECT_EQ(2*a,b)
+    a=1.d0
+    b=2.d0
+    ASSERT_EQ(2*a,b)
+    EXPECT_EQ(2*a,b)
 
 END_TEST
 

@@ -50,6 +50,10 @@ module t123_TestExe_M
     interface t123_printToString
         module procedure t123_printToString_C_DOUBLE
         module procedure t123_printToString_C_FLOAT
+        module procedure t123_printToString_C_SIZE_T
+        module procedure t123_printToString_C_INT
+        module procedure t123_printToString_C_BOOL
+        module procedure t123_printToString_C_STR
     end interface
 contains
 
@@ -65,6 +69,29 @@ character(DIGITS(X)+7) :: y
 WRITE(y,*)x
 end function
 
+function t123_printToString_C_INT(x) result(y)
+integer(C_INT),intent(in) :: x
+character(DIGITS(X)+7) :: y
+WRITE(y,*)x
+end function
+
+function t123_printToString_C_SIZE_T(x) result(y)
+integer(C_SIZE_T),intent(in) :: x
+character(DIGITS(X)+7) :: y
+WRITE(y,*)x
+end function
+
+function t123_printToString_C_BOOL(x) result(y)
+logical,intent(in) :: x
+character(8) :: y
+WRITE(y,*)x
+end function
+
+function t123_printToString_C_STR(x) result(y)
+character(*),intent(in) :: x
+character(len(x)) :: y
+y=x
+end function
 
 subroutine t123_TestExe_addTest(test_function,fileName,fileLine,test_case_name,test_name)
 
