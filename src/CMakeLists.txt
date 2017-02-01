@@ -1,9 +1,5 @@
 TRIBITS_PACKAGE( Testing123 )
 
-PRINT_VAR(CMAKE_CURRENT_SOURCE_DIR)
-# Allow access to Fortran modules for other codes.
-INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_BINARY_DIR}" )
-
 # Declare expected header path.
 INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_SOURCE_DIR}" )
 
@@ -55,9 +51,13 @@ IF(${PROJECT_NAME}_ENABLE_Fortran)
         t123/internal/FUNDAMENTAL_MACROS.inc
         FUNDAMENTAL_MACROS_INC
     )
+
+    # Allow access to Fortran modules and this include for other codes.
+    INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_BINARY_DIR}" )
+
     SET(F_HEADER "${CMAKE_CURRENT_BINARY_DIR}/t123/f/TestExe.inc.f90")
     CONFIGURE_FILE(
-        t123/f/TestExe.inc.f90 "${F_HEADER}"
+        t123/f/TestExe.inc.f90.in "${F_HEADER}"
     )
     INSTALL(FILES ${F_HEADER} DESTINATION "include/t123/f/")
 
@@ -70,7 +70,6 @@ IF(${PROJECT_NAME}_ENABLE_Fortran)
         SOURCES
             ${F_SOURCES}
     )
-    #TARGET_LINK_LIBRARIES( TestExe_f TestExe )
 
     # Add this package's Fortran test directory.
     TRIBITS_ADD_TEST_DIRECTORIES( t123/f/tests )
