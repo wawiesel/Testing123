@@ -1,0 +1,47 @@
+Change Dir: /Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX
+
+Run Build Command:"/opt/local/bin/gmake"
+/opt/local/bin/cmake -H/opt/local/share/cmake-3.4/Modules/FortranCInterface/Verify -B/Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX --check-build-system CMakeFiles/Makefile.cmake 0
+/opt/local/bin/cmake -E cmake_progress_start /Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX/CMakeFiles /Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX/CMakeFiles/progress.marks
+/opt/local/bin/gmake -f CMakeFiles/Makefile2 all
+gmake[1]: Entering directory '/Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX'
+/opt/local/bin/gmake -f CMakeFiles/VerifyFortran.dir/build.make CMakeFiles/VerifyFortran.dir/depend
+gmake[2]: Entering directory '/Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX'
+cd /Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX && /opt/local/bin/cmake -E cmake_depends "Unix Makefiles" /opt/local/share/cmake-3.4/Modules/FortranCInterface/Verify /opt/local/share/cmake-3.4/Modules/FortranCInterface/Verify /Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX /Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX /Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX/CMakeFiles/VerifyFortran.dir/DependInfo.cmake
+Scanning dependencies of target VerifyFortran
+gmake[2]: Leaving directory '/Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX'
+/opt/local/bin/gmake -f CMakeFiles/VerifyFortran.dir/build.make CMakeFiles/VerifyFortran.dir/requires
+gmake[2]: Entering directory '/Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX'
+gmake[2]: Nothing to be done for 'CMakeFiles/VerifyFortran.dir/requires'.
+gmake[2]: Leaving directory '/Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX'
+/opt/local/bin/gmake -f CMakeFiles/VerifyFortran.dir/build.make CMakeFiles/VerifyFortran.dir/build
+gmake[2]: Entering directory '/Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX'
+[ 16%] Building Fortran object CMakeFiles/VerifyFortran.dir/VerifyFortran.f.o
+/usr/local/bin/gfortran  -DVERIFY_CXX -I/Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX  -cpp  -ffree-line-length-none -pthread -O3   -c /opt/local/share/cmake-3.4/Modules/FortranCInterface/Verify/VerifyFortran.f -o CMakeFiles/VerifyFortran.dir/VerifyFortran.f.o
+[ 33%] Linking Fortran static library libVerifyFortran.a
+/opt/local/bin/cmake -P CMakeFiles/VerifyFortran.dir/cmake_clean_target.cmake
+/opt/local/bin/cmake -E cmake_link_script CMakeFiles/VerifyFortran.dir/link.txt --verbose=1
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc libVerifyFortran.a  CMakeFiles/VerifyFortran.dir/VerifyFortran.f.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib libVerifyFortran.a
+gmake[2]: Leaving directory '/Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX'
+[ 33%] Built target VerifyFortran
+/opt/local/bin/gmake -f CMakeFiles/VerifyFortranC.dir/build.make CMakeFiles/VerifyFortranC.dir/depend
+gmake[2]: Entering directory '/Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX'
+cd /Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX && /opt/local/bin/cmake -E cmake_depends "Unix Makefiles" /opt/local/share/cmake-3.4/Modules/FortranCInterface/Verify /opt/local/share/cmake-3.4/Modules/FortranCInterface/Verify /Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX /Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX /Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX/CMakeFiles/VerifyFortranC.dir/DependInfo.cmake
+Scanning dependencies of target VerifyFortranC
+gmake[2]: Leaving directory '/Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX'
+/opt/local/bin/gmake -f CMakeFiles/VerifyFortranC.dir/build.make CMakeFiles/VerifyFortranC.dir/build
+gmake[2]: Entering directory '/Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX'
+[ 50%] Building C object CMakeFiles/VerifyFortranC.dir/main.c.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -DVERIFY_CXX -I/Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX  -O3 -DNDEBUG   -o CMakeFiles/VerifyFortranC.dir/main.c.o   -c /opt/local/share/cmake-3.4/Modules/FortranCInterface/Verify/main.c
+[ 66%] Building C object CMakeFiles/VerifyFortranC.dir/VerifyC.c.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -DVERIFY_CXX -I/Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX  -O3 -DNDEBUG   -o CMakeFiles/VerifyFortranC.dir/VerifyC.c.o   -c /opt/local/share/cmake-3.4/Modules/FortranCInterface/Verify/VerifyC.c
+[ 83%] Building CXX object CMakeFiles/VerifyFortranC.dir/VerifyCXX.cxx.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   -DVERIFY_CXX -I/Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX  -std=c++11 -O3 -DNDEBUG   -o CMakeFiles/VerifyFortranC.dir/VerifyCXX.cxx.o -c /opt/local/share/cmake-3.4/Modules/FortranCInterface/Verify/VerifyCXX.cxx
+[100%] Linking CXX executable VerifyFortranC
+/opt/local/bin/cmake -E cmake_link_script CMakeFiles/VerifyFortranC.dir/link.txt --verbose=1
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -std=c++11 -O3 -DNDEBUG -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/VerifyFortranC.dir/main.c.o CMakeFiles/VerifyFortranC.dir/VerifyC.c.o CMakeFiles/VerifyFortranC.dir/VerifyCXX.cxx.o  -o VerifyFortranC  -L/usr/local/Cellar/gcc/5.3.0/lib/gcc/5/gcc/x86_64-apple-darwin15.0.0/5.3.0  -L/usr/local/Cellar/gcc/5.3.0/lib/gcc/5 libVerifyFortran.a -lgfortran -lquadmath -lm 
+gmake[2]: Leaving directory '/Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX'
+[100%] Built target VerifyFortranC
+gmake[1]: Leaving directory '/Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX'
+/opt/local/bin/cmake -E cmake_progress_start /Users/ww5/dev/Testing123/build/CMakeFiles/FortranCInterface/VerifyCXX/CMakeFiles 0
