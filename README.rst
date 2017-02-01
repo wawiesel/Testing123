@@ -76,8 +76,8 @@ the strategy in Testing123's CMakeLists.txt file.
 The first include handles all the TriBITS setup and everything else. If built
 as a **project**, then the ConfigureProject command is executed first, then
 the ConfigurePackage command (ConfigureSuperPackage is also available). If you
-were to include Testing123 as an external package in a pure project 
-(I would recommend at ``external/Testing123``, then your CMakeLists.txt 
+were to include Testing123 as an external package in a pure project
+(I would recommend at ``external/Testing123``, then your CMakeLists.txt
 would look like:
 
 .. code-block:: cmake
@@ -105,6 +105,4 @@ To update BootsOnTheGround:
 
 ::
 
-    git subtree pull --prefix external/BootsOnTheGround
-        https://github.com/wawiesel/BootsOnTheGround.git
-        develop --squash
+    git subtree pull --prefix external/BootsOnTheGround https://github.com/wawiesel/BootsOnTheGround.git develop --squash

@@ -1,1 +1,0 @@
-BOTG_AddTPL( LIB REQUIRED GTest )

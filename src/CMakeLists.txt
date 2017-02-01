@@ -1,8 +1,11 @@
+TRIBITS_PACKAGE( Testing123 )
+
+PRINT_VAR(CMAKE_CURRENT_SOURCE_DIR)
 # Allow access to Fortran modules for other codes.
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
+INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_BINARY_DIR}" )
 
 # Declare expected header path.
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_LIST_DIR})
+INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_SOURCE_DIR}" )
 
 # Set C++ sources.
 SET(CXX_SOURCES
@@ -21,7 +24,7 @@ SET(CXX_HEADERS
 INSTALL(FILES ${CXX_HEADERS} DESTINATION "include/t123/")
 
 # Add special unit test creation command.
-INCLUDE( cmake/AddCxxTest.cmake )
+INCLUDE( t123/cmake/AddCxxTest.cmake )
 
 # Create CXX library.
 TRIBITS_ADD_LIBRARY(
@@ -59,7 +62,7 @@ IF(${PROJECT_NAME}_ENABLE_Fortran)
     INSTALL(FILES ${F_HEADER} DESTINATION "include/t123/f/")
 
     # Add special unit test creation command.
-    INCLUDE( cmake/AddFortranTest.cmake )
+    INCLUDE( "${CMAKE_CURRENT_LIST_DIR}/t123/cmake/AddFortranTest.cmake" )
 
     # Create Fortran library.
     TRIBITS_ADD_LIBRARY(
@@ -73,3 +76,5 @@ IF(${PROJECT_NAME}_ENABLE_Fortran)
     TRIBITS_ADD_TEST_DIRECTORIES( t123/f/tests )
 
 ENDIF()
+
+TRIBITS_PACKAGE_POSTPROCESS()

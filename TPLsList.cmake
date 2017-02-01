@@ -1,1 +1,1 @@
-INCLUDE( "${CMAKE_SOURCE_DIR}/external/BootsOnTheGround/TPLsList.cmake" )
+INCLUDE( "${BOTG_SOURCE_DIR}/TPLsList.cmake" )
