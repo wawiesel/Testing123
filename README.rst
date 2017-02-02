@@ -15,9 +15,21 @@ GoogleTest C++ unit test framework for scientific computing purposes.
 - Support for additional comparison macros, such as vector comparisons
   or relative differences.
 
-The Fortran support will never be as complete as the C++ support, but as there
-are not really any good Fortran unit testing frameworks out there, it provides
-something. The goal with Fortran support is to hook in as directly as possible
+Typically, this is all you'll need to use it, 
+
+.. code-block:: cmake
+
+    #blah/blah/tests/CMakeLists.txt 
+    ADD_FORTRAN_TEST( tstMyTestFile.f90 )
+    ADD_CXX_TEST( tstMyTestFile.cc )
+    
+although it eventually calls 
+`TRIBITS_ADD_EXECUTABLE_AND_TEST <https://tribits.org/doc/TribitsDevelopersGuide.html#tribits-add-executable-and-test>`_,
+so you can check out that documentation for what else you can do.
+
+The Fortran support will never be as complete as the C++ support, but it's 
+probably still the best unit testing framework for Fortran out there.
+The goal with Fortran support is to hook in as directly as possible
 to the Googletest functions. In some cases we have to hack in to a private method,
 which we do with shame, but it's better than completely reimplementing some
 functionality on the Fortran side.
@@ -26,19 +38,20 @@ To Do
 -----
 
 Testing123_ is not quite ready for prime time. The MPI component is not yet
-enabled and the Fortran support has basically only been shown for the
-``EXPECT_EQ`` macro.
+enabled and the Fortran support only exists for the ``EXPECT_EQ`` macro.
 
-- Enable MPI (starts with BootsOnTheGround_)
-- Other ``EXPECT_*`` macros like ``EXPECT_LE, EXPECT_LT, ...``
-- Fix ``ASSERT_*`` macros to halt program.
-- Document how exactly Fortran was hacked (it's a good story).
-- Extend macro definitions to handle more than 10 test cases.
-- Fix Fortran literal strings with double quotes. ``EXPECT_EQ("a","a")``
-  bombs because the C preprocessor converts ``"a"`` to ``"\"a\""`` but Fortran does
-  not understand that kind of escape ``\"`` instead using ``""``. The
-  workaround is just to use single quotes in string literals in the
-  macros, ``EXPECT_EQ('a','a')``.
+- C++ and Fortran
+    - Enable MPI (starts with BootsOnTheGround_)
+- Fortran only
+    - Other ``EXPECT_*`` macros like ``EXPECT_LE, EXPECT_LT, ...``
+    - Fix ``ASSERT_*`` macros to halt the program.
+    - Document how exactly Fortran was hacked (it's a good story).
+    - Extend macro definitions to handle more than 10 test cases.
+    - Fix Fortran literal strings with double quotes. ``EXPECT_EQ("a","a")``
+      bombs because the C preprocessor converts ``"a"`` to ``"\"a\""`` but Fortran does
+      not understand that kind of escape ``\"`` instead using ``""``. The
+      workaround is just to use single quotes in string literals in the
+      macros, ``EXPECT_EQ('a','a')``.
 
 Embedded Packages
 -----------------
