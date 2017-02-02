@@ -71,6 +71,7 @@ IF(${PROJECT_NAME}_ENABLE_Fortran)
         SOURCES
             ${F_SOURCES}
     )
+    TARGET_LINK_LIBRARIES( Testing123_f Testing123 )
 
     # Add this package's Fortran test directory.
     TRIBITS_ADD_TEST_DIRECTORIES( t123/f/tests )
