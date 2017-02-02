@@ -16,16 +16,13 @@ FUNCTION( ADD_FORTRAN_TEST )
         ${test_file}
   )
 
-  SET( include_file "${CMAKE_CURRENT_SOURCE_DIR}/t123/f/TestExe.inc.f90" )
-
-  # Then we need to run the C preprocessor on it, for which we need to
-  # generate an includes list.
-  GET_PROPERTY(dirs DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" PROPERTY INCLUDE_DIRECTORIES)
+  # Then we need to run the C preprocessor on it.
+  # The ADD_FORTRAN_TEST_INCLUDE_DIR is set in Testing123/src/CMakeLists.txt!
   SET( includes "" )
-  FOREACH(dir ${dirs})
-    STRING(STRIP ${dir} dir)
-    LIST(APPEND includes -I${dir} )
-  ENDFOREACH()
+  IF( ADD_FORTRAN_TEST_INCLUDE_DIR )
+    STRING(STRIP ${ADD_FORTRAN_TEST_INCLUDE_DIR} ADD_FORTRAN_TEST_INCLUDE_DIR)
+    SET(includes -I${ADD_FORTRAN_TEST_INCLUDE_DIR} )
+  ENDIF()
   SET( copied_file "${CMAKE_CURRENT_BINARY_DIR}/${test_file}" )
   SET( preprocessed_file "${CMAKE_CURRENT_BINARY_DIR}/${test_name}.preprocessed.f90" )
   ADD_CUSTOM_COMMAND(

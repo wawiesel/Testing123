@@ -53,6 +53,7 @@ IF(${PROJECT_NAME}_ENABLE_Fortran)
     )
 
     # Allow access to Fortran modules and this include for other codes.
+    GLOBAL_SET( ADD_FORTRAN_TEST_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}")
     INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_BINARY_DIR}" )
 
     SET(F_HEADER "${CMAKE_CURRENT_BINARY_DIR}/t123/f/TestExe.inc.f90")
