@@ -1,7 +1,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0 FATAL_ERROR)
 
 # This sets BOTG_SOURCE_DIR which may be used later.
-INCLUDE( "${CMAKE_SOURCE_DIR}/external/BootsOnTheGround/cmake/BOTG_INCLUDE.cmake" )
+INCLUDE( "${CMAKE_SOURCE_DIR}/cmake/BOTG_INCLUDE.cmake" )
 
 # Configure the project.
 BOTG_ConfigureProject( "${CMAKE_SOURCE_DIR}" )
