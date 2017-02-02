@@ -15,19 +15,19 @@ GoogleTest C++ unit test framework for scientific computing purposes.
 - Support for additional comparison macros, such as vector comparisons
   or relative differences.
 
-Typically, this is all you'll need to use it, 
+Typically, this is all you'll need to use it,
 
 .. code-block:: cmake
 
-    #blah/blah/tests/CMakeLists.txt 
+    #blah/blah/tests/CMakeLists.txt
     ADD_FORTRAN_TEST( tstMyTestFile.f90 )
     ADD_CXX_TEST( tstMyTestFile.cc )
-    
-although it eventually calls 
+
+although it eventually calls
 `TRIBITS_ADD_EXECUTABLE_AND_TEST <https://tribits.org/doc/TribitsDevelopersGuide.html#tribits-add-executable-and-test>`_,
 so you can check out that documentation for what else you can do.
 
-The Fortran support will never be as complete as the C++ support, but it's 
+The Fortran support will never be as complete as the C++ support, but it's
 probably still the best unit testing framework for Fortran out there.
 The goal with Fortran support is to hook in as directly as possible
 to the Googletest functions. In some cases we have to hack in to a private method,
@@ -56,7 +56,7 @@ enabled and the Fortran support only exists for the ``EXPECT_EQ`` macro.
 Embedded Packages
 -----------------
 
-Testing123_ includes the BootsOnTheGround_ package as a git subtree, and depends
+Testing123_ bootstraps the BootsOnTheGround_ package and depends
 on GoogleTest as a Third Party Library (TPL). BootsOnTheGround includes TriBITS_.
 
 If you use Testing123 for testing a combined project/package,
@@ -78,7 +78,7 @@ you would just include it in your PackagesList.cmake:
 .. code-block:: cmake
 
     TRIBITS_REPOSITORY_DEFINE_PACKAGES(
-      BootsOnTheGround external/Testing123/external/BootsOnTheGround/src ST
+      BootsOnTheGround external/BootsOnTheGround/src                     ST
       Testing123       external/Testing123/src                           PT
     )
 
@@ -86,7 +86,7 @@ You could of course have your own BootsOnTheGround package and disregard
 Testing123's, but why? You get one prettier path in exchange for a bunch of
 extra baggage. Note the ``src`` directory at the end. This is the location
 of the CMakeLists.txt file corresponding to the **package**, not the
-**project** CMakeLists.txt which is at the root level. 
+**project** CMakeLists.txt which is at the root level.
 
 See Template123_ for a minimal skeleton repo of a Testing123-enabled project.
 
@@ -96,9 +96,3 @@ See Template123_ for a minimal skeleton repo of a Testing123-enabled project.
 .. _Testing123: http://github.com/wawiesel/Testing123
 .. _Template123: http://github.com/wawiesel/Template123
 
-Dependency Update Instructions
-------------------------------
-
-::
-
-    git subtree pull --prefix external/BootsOnTheGround https://github.com/wawiesel/BootsOnTheGround.git develop --squash
