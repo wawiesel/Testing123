@@ -21,28 +21,13 @@ MACRO( BOTG_DownloadExternalProjects external_projects )
     ENDFOREACH()
 ENDMACRO()
 
-# Use cached value.
-IF( DEFINED BOTG_SOURCE_DIR )
 
-    IF( EXISTS "${BOTG_SOURCE_DIR}" )
-        MESSAGE( STATUS "[BootsOnTheGround] using cached BOTG_SOURCE_DIR=${BOTG_SOURCE_DIR} ... ")
-    ELSE()
-        MESSAGE( ERROR "[BootsOnTheGround] cached BOTG_SOURCE_DIR=${BOTG_SOURCE_DIR} does not exist!")
-    ENDIF()
+# Set the source directory and update the projects.
+SET(BOTG_SOURCE_DIR "${CMAKE_SOURCE_DIR}/external/BootsOnTheGround" CACHE PATH INTERNAL)
+BOTG_DownloadExternalProjects(
+    BootsOnTheGround
+)
 
-# Set the BootsOnTheGround source directory!
-ELSE()
-
-    SET(BOTG_SOURCE_DIR "${CMAKE_SOURCE_DIR}/external/BootsOnTheGround" CACHE PATH INTERNAL)
-
-    IF( EXISTS "${BOTG_SOURCE_DIR}" )
-        MESSAGE( STATUS "[BootsOnTheGround] using BOTG_SOURCE_DIR=${BOTG_SOURCE_DIR} ... ")
-    ELSE()
-        MESSAGE( STATUS "[BootsOnTheGround] bootstrapping in...")
-        BOTG_DownloadExternalProjects( BootsOnTheGround )
-    ENDIF()
-
-ENDIF()
 
 # Includes all the "BootsOnTheGround" (BOTG) functions.
 INCLUDE( "${BOTG_SOURCE_DIR}/cmake/BOTG.cmake" )
