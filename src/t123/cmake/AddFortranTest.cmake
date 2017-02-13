@@ -4,9 +4,12 @@ MACRO( ADD_FORTRAN_TEST )
   LIST( GET args 0 test_file )
   LIST( REMOVE_AT args 0 )
 
-  BOTG_AddCompilerFlags( Fortran ANY ANY
-      "-cpp"
-      "-ffree-line-length-none"
+  # Enable fortran goodies.
+  BOTG_EnableFortran( C_PREPROCESSOR UNLIMITED_LINE_LENGTH )
+
+  #Enable pthread.
+  BOTG_AddCompilerFlags( Fortran ANY "Linux"
+      "-pthread"
   )
 
   # Get the name without the extension and make some other key names.
