@@ -5,6 +5,7 @@ INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_SOURCE_DIR}" )
 
 # Set C++ standard.
 BOTG_UseCxxStandard( 11 )
+BOTG_MinimumCompilerVersion( GNU CXX 4.8 )
 
 # Set C++ sources.
 SET(CXX_SOURCES
@@ -39,6 +40,9 @@ TRIBITS_ADD_TEST_DIRECTORIES( t123/tests )
 
 # Possibly process fortran.
 IF(${PROJECT_NAME}_ENABLE_Fortran)
+
+    # 4.9 is required so that C_LOC works as expected.
+    BOTG_MinimumCompilerVersion( GNU Fortran 4.9 )
 
     # Enable fortran goodies.
     BOTG_EnableFortran(
