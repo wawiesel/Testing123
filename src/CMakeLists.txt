@@ -77,11 +77,24 @@ IF(${PROJECT_NAME}_ENABLE_Fortran)
     GLOBAL_SET( ADD_FORTRAN_TEST_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}")
     INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_BINARY_DIR}" )
 
-    SET(F_HEADER "${CMAKE_CURRENT_BINARY_DIR}/t123/f/TestExe.inc.f90")
+    #Configure main include.
+    SET( main_include "${CMAKE_CURRENT_BINARY_DIR}/t123/f/TestExe.inc.f90")
     CONFIGURE_FILE(
-        t123/f/TestExe.inc.f90.in "${F_HEADER}"
+        t123/f/TestExe.inc.f90.in "${main_include}"
     )
-    INSTALL(FILES ${F_HEADER} DESTINATION "include/t123/f/")
+
+    #Configure include to end a test.
+    SET( end_test_include "${CMAKE_CURRENT_BINARY_DIR}/t123/f/TEST_END.inc.f90")
+    CONFIGURE_FILE(
+        t123/f/TEST_END.inc.f90.in "${end_test_include}"
+    )
+
+    #Install headers.
+    SET(F_HEADERS
+        "${main_include}"
+        "${test_end_include}"
+    )
+    INSTALL(FILES ${F_HEADERS} DESTINATION "include/t123/f/")
 
     # Add special unit test creation command.
     INCLUDE( "${CMAKE_CURRENT_LIST_DIR}/t123/cmake/AddFortranTest.cmake" )

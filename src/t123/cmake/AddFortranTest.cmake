@@ -8,7 +8,7 @@ MACRO( ADD_FORTRAN_TEST )
   BOTG_EnableFortran( C_PREPROCESSOR UNLIMITED_LINE_LENGTH )
 
   #Enable pthread.
-  BOTG_AddCompilerFlags( Fortran ANY "Linux"
+  BOTG_AddCompilerFlags( Fortran "Clang|GNU" "Linux"
       "-pthread"
   )
 
@@ -32,13 +32,33 @@ MACRO( ADD_FORTRAN_TEST )
     SET(includes -I${ADD_FORTRAN_TEST_INCLUDE_DIR} )
   ENDIF()
   SET( copied_file "${CMAKE_CURRENT_BINARY_DIR}/${test_file}" )
+
+  # This is a tricky way to deal with endsubroutine;endsubroutine being
+  # invalid fortran. We want to remove { and replace } with the equivalent
+  # of end subroutine ; end subroutine but on two lines. This is why we
+  # couldn't use the c preprocessor--it has to be on one line for cpp.
+  # The trickiest thing we do is put an include file in so we can keep
+  # track of line numbers DESPITE having expanded } to two lines!
+  SET( copied_n_file "${CMAKE_CURRENT_BINARY_DIR}/${test_name}.newline.f90" )
+  FILE( GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${test_name}.newline.cmake" CONTENT
+  "FILE( READ \"${copied_file}\" temp )\nSTRING( REPLACE \"{\" \"\" temp \"\${temp}\")\nSTRING( REGEX REPLACE \"![^\\n]*\" \"\" temp \"\${temp}\")\nSTRING( REGEX REPLACE \"\\n}\" \";end subroutine\n\#include \\\"t123/f/TEST_END.inc.f90\\\"\" temp \"\${temp}\")\nFILE( WRITE \"${copied_n_file}\" \"\${temp}\" )"
+  )
+  ADD_CUSTOM_COMMAND(
+    OUTPUT ${copied_n_file}
+    COMMAND "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/${test_name}.newline.cmake"
+    VERBATIM
+    DEPENDS ${copied_file}
+  )
+
+  # Now preprocess the file.
   SET( preprocessed_file "${CMAKE_CURRENT_BINARY_DIR}/${test_name}.preprocessed.f90" )
   ADD_CUSTOM_COMMAND(
     OUTPUT "${preprocessed_file}"
-    COMMAND gcc ${includes} -x c -E "${copied_file}" > "${preprocessed_file}"
+    COMMAND gcc ${includes} -x c -E "${copied_n_file}" > "${preprocessed_file}"
     VERBATIM
-    IMPLICIT_DEPENDS C "${copied_file}"
+    IMPLICIT_DEPENDS C "${copied_n_file}"
   )
+
 
   # Now we need to find/replace the binary location with the source location,
   # so the error messages look right.

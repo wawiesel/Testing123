@@ -7,7 +7,7 @@ implicit none
 contains
 
 ! Test basic expect on scalar values: string, int, double, float.
-TEST( Expect, Scalars )
+TEST( Expect, Scalars ){
 
     ! Reference value first, test value second.
     EXPECT_EQ( 700, 700 );
@@ -18,17 +18,16 @@ TEST( Expect, Scalars )
     !EXPECT_NE( "", "done" );
     !EXPECT_LE( 1, 1 );
     !EXPECT_GE( 4.1, 3.5 );
-END_TEST
+}
 
-TEST( Demo, Calcs )
+TEST( Demo, Calcs ){
     real(C_DOUBLE) :: a,b
 
     a=1.d0
     b=2.d0
     ASSERT_EQ(2*a,b)
     EXPECT_EQ(2*a,b)
-
-END_TEST
+}
 
 end module
 

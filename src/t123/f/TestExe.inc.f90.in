@@ -25,7 +25,7 @@ contains;;;\
 subroutine _M_CAT(InternalTest_,i)();;;\
 
 #define TEST(A,B) SETUP_TEST(A,B,__COUNTER__)
-#define END_TEST end subroutine;;;end subroutine
+!! END_TEST is defined in the AddFortranTest.cmake file !!
 
 #define _M_LOOP(i, _) _M_CAT(call Test_,i)();;;
 
