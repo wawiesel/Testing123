@@ -1,4 +1,4 @@
-FUNCTION( ADD_FORTRAN_TEST )
+MACRO( ADD_FORTRAN_TEST )
   # We'll pass the non-processed arguments to the add_test below.
   SET(args ${ARGV})
   LIST( GET args 0 test_file )
@@ -59,4 +59,4 @@ FUNCTION( ADD_FORTRAN_TEST )
   )
 
 
-ENDFUNCTION()
+ENDMACRO()

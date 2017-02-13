@@ -1,4 +1,4 @@
-FUNCTION( ADD_CXX_TEST )
+MACRO( ADD_CXX_TEST )
   SET(args ${ARGV})
   LIST( GET args 0 test_file )
   LIST( REMOVE_AT args 0 )
@@ -11,4 +11,4 @@ FUNCTION( ADD_CXX_TEST )
   )
   #TARGET_LINK_LIBRARIES( ${PACKAGE_NAME}_${test_file_we} TestExe )
 
-ENDFUNCTION()
+ENDMACRO()
