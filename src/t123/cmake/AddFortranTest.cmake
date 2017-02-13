@@ -4,6 +4,11 @@ FUNCTION( ADD_FORTRAN_TEST )
   LIST( GET args 0 test_file )
   LIST( REMOVE_AT args 0 )
 
+  BOTG_AddCompilerFlags( Fortran ANY ANY
+      "-cpp"
+      "-ffree-line-length-none"
+  )
+
   # Get the name without the extension and make some other key names.
   GET_FILENAME_COMPONENT( test_file_we ${test_file} NAME_WE )
   SET( test_name ${test_file_we}_f )

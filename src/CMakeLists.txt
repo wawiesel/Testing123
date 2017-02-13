@@ -3,6 +3,14 @@ TRIBITS_PACKAGE( Testing123 )
 # Declare expected header path.
 INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_SOURCE_DIR}" )
 
+# Add flags we need.
+BOTG_AddCompilerFlags( CXX ANY ANY
+  "-std=c++11"
+)
+BOTG_AddCompilerFlags( CXX "GNU" ANY
+  "-pthread"
+)
+
 # Set C++ sources.
 SET(CXX_SOURCES
     t123/TestExe.cc
@@ -37,8 +45,14 @@ TRIBITS_ADD_TEST_DIRECTORIES( t123/tests )
 # Possibly process fortran.
 IF(${PROJECT_NAME}_ENABLE_Fortran)
 
-    # This needs to be arbitrary.
-    SET(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -ffree-line-length-none -cpp")
+    # Add flags we need.
+    BOTG_AddCompilerFlags( Fortran "GNU" ANY
+      "-pthread"
+    )
+    BOTG_AddCompilerFlags( Fortran ANY ANY
+      "-cpp"
+      "-ffree-line-length-none"
+    )
 
     # Set Fortran sources.
     SET(F_SOURCES
