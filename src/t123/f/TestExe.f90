@@ -23,22 +23,22 @@ module t123_TestExe_M
             testVariable,testValue,compareOper)&
             BIND(C,name="t123_TestExe_c_addTestPartResult")
               use ISO_C_BINDING
-            character(1), VALUE :: file
+            character(1) :: file
             integer(C_INT), VALUE          :: line
             integer(C_INT), VALUE :: k
-            character(1), VALUE :: refVariable,refValue
-            character(1), VALUE :: testVariable,testValue
-            character(1), VALUE :: compareOper
+            character(1) :: refVariable,refValue
+            character(1) :: testVariable,testValue
+            character(1) :: compareOper
         end subroutine
 
         subroutine t123_TestExe_c_addTest(test_function,file,line,test_case_name,test_name)&
             BIND(C,name="t123_TestExe_c_addTest")
               use ISO_C_BINDING
             type(C_FUNPTR), VALUE :: test_function
-            character(1), VALUE :: file
+            character(1) :: file
             integer(C_INT), VALUE     :: line
-            character(1), VALUE :: test_case_name
-            character(1), VALUE :: test_name
+            character(1) :: test_case_name
+            character(1) :: test_name
         end subroutine
 
         integer function t123_TestExe_c_finish()&
