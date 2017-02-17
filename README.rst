@@ -4,18 +4,22 @@ Testing123
 .. image:: https://travis-ci.org/wawiesel/Testing123.svg?branch=master
     :target: https://travis-ci.org/wawiesel/Testing123
 
+TriBITS/CMake-enabled unit testing for C++/Fortran
+
 .. image:: http://i.imgur.com/RjuuVG0.jpg
 
-TriBITS_-enabled unit testing for C++ and Fortran
+Testing123 provides two macros to use in CMakeLists.txt files for 
+declaring unit tests.
 
 .. code-block:: cmake
 
-    #blah/blah/tests/CMakeLists.txt
+    # MyPackage/src/tests/CMakeLists.txt
     ADD_FORTRAN_TEST( tstMyTestFile.f90 )
     ADD_CXX_TEST( tstMyTestFile.cc )
     
-The main purpose of this unit testing package is to extend the beautiful
-GoogleTest C++ unit test framework for scientific computing purposes.
+All the heavy lifting is done by the beautiful GoogleTest C++ unit 
+test framework. We just want to add a little layer on top, with scientific
+computing as the main target application.
 
 - TriBITS dependency management wrapper around Googletest.
 - Support for Fortran unit testing (with same style/feel as C++)
