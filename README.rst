@@ -4,6 +4,8 @@ Testing123
 .. image:: https://travis-ci.org/wawiesel/Testing123.svg?branch=master
     :target: https://travis-ci.org/wawiesel/Testing123
 
+.. image:: http://i.imgur.com/RjuuVG0.jpg
+
 TriBITS_-enabled unit testing for C++ and Fortran
 
 The main purpose of this unit testing package is to extend the beautiful
