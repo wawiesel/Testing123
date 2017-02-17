@@ -1,7 +1,7 @@
-Testing123
-==========
+Testing123 |build|
+==================
 
-.. image:: https://travis-ci.org/wawiesel/Testing123.svg?branch=master
+.. |build| image:: https://travis-ci.org/wawiesel/Testing123.svg?branch=master
     :target: https://travis-ci.org/wawiesel/Testing123
 
 TriBITS/CMake-enabled unit testing for C++/Fortran
