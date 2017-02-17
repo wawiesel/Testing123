@@ -8,6 +8,12 @@ Testing123
 
 TriBITS_-enabled unit testing for C++ and Fortran
 
+.. code-block:: cmake
+
+    #blah/blah/tests/CMakeLists.txt
+    ADD_FORTRAN_TEST( tstMyTestFile.f90 )
+    ADD_CXX_TEST( tstMyTestFile.cc )
+    
 The main purpose of this unit testing package is to extend the beautiful
 GoogleTest C++ unit test framework for scientific computing purposes.
 
@@ -17,17 +23,41 @@ GoogleTest C++ unit test framework for scientific computing purposes.
 - Support for additional comparison macros, such as vector comparisons
   or relative differences.
 
-Typically, this is all you'll need to use it,
+In the end, ADD_FORTRAN_TEST or ADD_CXX_TEST will call 
+`TRIBITS_ADD_EXECUTABLE_AND_TEST <https://tribits.org/doc/TribitsDevelopersGuide.html#tribits-add-executable-and-test>`_,
+so the possibilities are endless.
 
 .. code-block:: cmake
 
-    #blah/blah/tests/CMakeLists.txt
-    ADD_FORTRAN_TEST( tstMyTestFile.f90 )
-    ADD_CXX_TEST( tstMyTestFile.cc )
-
-although it eventually calls
-`TRIBITS_ADD_EXECUTABLE_AND_TEST <https://tribits.org/doc/TribitsDevelopersGuide.html#tribits-add-executable-and-test>`_,
-so you can check out that documentation for what else you can do.
+    TRIBITS_ADD_EXECUTABLE_AND_TEST(
+      <exeRootName>  [NOEXEPREFIX]  [NOEXESUFFIX]  [ADD_DIR_TO_NAME]
+      SOURCES <src0> <src1> ...
+      [NAME <testName> | NAME_POSTFIX <testNamePostfix>]
+      [CATEGORIES <category0>  <category1> ...]
+      [HOST <host0> <host1> ...]
+      [XHOST <xhost0> <xhost1> ...]
+      [XHOST_TEST <xhost0> <xhost1> ...]
+      [HOSTTYPE <hosttype0> <hosttype1> ...]
+      [XHOSTTYPE <xhosttype0> <xhosttype1> ...]
+      [XHOSTTYPE_TEST <xhosttype0> <xhosttype1> ...]
+      [EXCLUDE_IF_NOT_TRUE <varname0> <varname1> ...]
+      [DIRECTORY <dir>]
+      [TESTONLYLIBS <lib0> <lib1> ...]
+      [IMPORTEDLIBS <lib0> <lib1> ...]
+      [COMM [serial] [mpi]]
+      [ARGS "<arg0> <arg1> ..." "<arg2> <arg3> ..." ...]
+      [NUM_MPI_PROCS <numProcs>]
+      [LINKER_LANGUAGE (C|CXX|Fortran)]
+      [STANDARD_PASS_OUTPUT
+        | PASS_REGULAR_EXPRESSION "<regex0>;<regex1>;..."]
+      [FAIL_REGULAR_EXPRESSION "<regex0>;<regex1>;..."]
+      [WILL_FAIL]
+      [ENVIRONMENT <var0>=<value0> <var1>=<value1> ...]
+      [INSTALLABLE]
+      [TIMEOUT <maxSeconds>]
+      [ADDED_EXE_TARGET_NAME_OUT <exeTargetName>]
+      [ADDED_TESTS_NAMES_OUT <testsNames>]
+      )
 
 The Fortran support will never be as complete as the C++ support, but it's
 probably still the best unit testing framework for Fortran out there.
