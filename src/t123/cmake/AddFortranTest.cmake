@@ -64,7 +64,7 @@ MACRO( ADD_FORTRAN_TEST )
   # so the error messages look right.
   SET( final_file "${CMAKE_CURRENT_BINARY_DIR}/${test_name}.f90" )
   FILE( GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${test_name}.cmake" CONTENT
-  "FILE( READ \"${preprocessed_file}\" temp )\nSTRING( REPLACE \"${CMAKE_CURRENT_BINARY_DIR}\" \"${CMAKE_CURRENT_SOURCE_DIR}\" temp \"\${temp}\")\nFILE( WRITE \"${final_file}\" \"\${temp}\" )"
+  "FILE( READ \"${preprocessed_file}\" temp )\nSTRING( REPLACE \"${copied_n_file}\" \"${CMAKE_CURRENT_SOURCE_DIR}/${test_file}\" temp \"\${temp}\")\nFILE( WRITE \"${final_file}\" \"\${temp}\" )"
   )
   ADD_CUSTOM_COMMAND(
     OUTPUT ${final_file}

@@ -56,6 +56,14 @@ module t123_TestExe_M
         module procedure t123_printToString_C_BOOL
         module procedure t123_printToString_C_STR
     end interface
+    interface operator (//)
+        module procedure t123_concat_C_DOUBLE
+        module procedure t123_concat_C_FLOAT
+        module procedure t123_concat_C_SIZE_T
+        module procedure t123_concat_C_INT
+        module procedure t123_concat_C_BOOL
+    end interface
+
 contains
 
 function t123_printToString_C_DOUBLE(x) result(y)
@@ -94,6 +102,42 @@ character(len(x)) :: y
 y=x
 end function
 
+function t123_concat_C_DOUBLE(a,b) result(c)
+character(*),intent(in) :: a
+real(C_DOUBLE),intent(in) :: b
+character(len=:), allocatable :: c
+c=a//t123_printToString(b)
+end function
+
+function t123_concat_C_FLOAT(a,b) result(c)
+character(*),intent(in) :: a
+real(C_FLOAT),intent(in) :: b
+character(len=:), allocatable :: c
+c=a//t123_printToString(b)
+end function
+
+function t123_concat_C_INT(a,b) result(c)
+character(*),intent(in) :: a
+integer(C_INT),intent(in) :: b
+character(len=:), allocatable :: c
+c=a//t123_printToString(b)
+end function
+
+function t123_concat_C_SIZE_T(a,b) result(c)
+character(*),intent(in) :: a
+integer(C_SIZE_T),intent(in) :: b
+character(len=:), allocatable :: c
+c=a//t123_printToString(b)
+end function
+
+function t123_concat_C_BOOL(a,b) result(c)
+character(*),intent(in) :: a
+logical,intent(in) :: b
+character(len=:), allocatable :: c
+c=a//t123_printToString(b)
+end function
+
+
 subroutine t123_TestExe_addTest(test_function,fileName,fileLine,test_case_name,test_name)
 
   interface
@@ -110,30 +154,30 @@ call t123_TestExe_c_addTest(C_FUNLOC(test_function),fileName//C_NULL_CHAR,fileLi
 
 end subroutine
 
-character function t123_TestExe_addTestPartResult(fileName,fileLine,&
-    refVariable,refValue,testVariable,testValue,compareOper,compare,fatal) result(goOn)
+subroutine t123_TestExe_addTestPartResult(fileName,fileLine,&
+    refVariable,refValue,testVariable,testValue,compareOper,fatal,msg)
 character(*),intent(in) :: fileName
 integer,intent(in) :: fileLine
 character(*),intent(in) :: refVariable,testVariable,compareOper
 character(*),intent(in) :: refValue,testValue
-logical,intent(in) :: compare
 logical,intent(in) :: fatal
-integer(C_INT) :: k
+character(*),intent(in) :: msg
 
-if( compare )then
+integer(C_INT) :: k
+if( t123_LAST_TEST_EVAL )then
     k=0
 else if ( fatal )then
     k=-1
 else
     k=1
 end if
-
 call t123_TestExe_c_addTestPartResult(fileName//C_NULL_CHAR,fileLine,k,&
     refVariable//C_NULL_CHAR,TRIM(ADJUSTL(refValue))//C_NULL_CHAR,&
     testVariable//C_NULL_CHAR,TRIM(ADJUSTL(testValue))//C_NULL_CHAR,&
     compareOper//C_NULL_CHAR)
-goOn = ''
-end function
+
+if( len_trim(msg) /= 0 )write(6,'(a)')msg
+end subroutine
 
 subroutine t123_TestExe_init()
     integer(c_int) :: argc

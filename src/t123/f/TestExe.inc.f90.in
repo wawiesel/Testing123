@@ -37,6 +37,15 @@ _M_EVAL(_M_REPEAT(__COUNTER__, _M_LOOP, ~));;;\
 call t123_TestExe_finish();;;\
 if( t123_RETURN_CODE/=0 )STOP 1
 
-#define EXPECT_OR_ASSERT(OPER,FATAL,ref,test) t123_LAST_TEST_EVAL=(ref OPER test); if( .not.t123_LAST_TEST_EVAL )write(6,'(a)',advance='no')t123_TestExe_addTestPartResult(__FILE__,__LINE__,#ref,t123_printToString(ref),#test,t123_printToString(test),#OPER,t123_LAST_TEST_EVAL,FATAL)
-#define EXPECT_EQ(ref,test) EXPECT_OR_ASSERT(==,.FALSE.,ref,test)
-#define ASSERT_EQ(ref,test) EXPECT_OR_ASSERT(==,.TRUE.,ref,test)
+#define _M_MACRO_SWITCH(_1,_2,_3,NAME,...) NAME
+
+#define EXPECT_OR_ASSERT(OPER,FATAL,ref,test,msg) t123_LAST_TEST_EVAL=(ref OPER test); if( .not.t123_LAST_TEST_EVAL )call t123_TestExe_addTestPartResult(__FILE__,__LINE__,#ref,""//ref,#test,""//test,#OPER,FATAL,msg)
+
+#define EXPECT_EQ3(ref,test,msg) EXPECT_OR_ASSERT(==,.FALSE.,ref,test,msg)
+#define EXPECT_EQ2(ref,test) EXPECT_OR_ASSERT(==,.FALSE.,ref,test,"")
+#define EXPECT_EQ(...) _M_MACRO_SWITCH(__VA_ARGS__, EXPECT_EQ3, EXPECT_EQ2)(__VA_ARGS__)
+
+#define ASSERT_EQ3(ref,test,msg) EXPECT_OR_ASSERT(==,.TRUE.,ref,test,msg)
+#define ASSERT_EQ2(ref,test) EXPECT_OR_ASSERT(==,.TRUE.,ref,test,"")
+#define ASSERT_EQ(...) _M_MACRO_SWITCH(__VA_ARGS__, ASSERT_EQ3, ASSERT_EQ2)(__VA_ARGS__)
+
