@@ -22,11 +22,11 @@ TEST( Expect, Scalars ){
 
 TEST( Demo, Calcs ){
     real(C_DOUBLE) :: a,b
-
     a=1.d0
     b=2.d0
     ASSERT_EQ(2*a,b)
     EXPECT_EQ(2*a,b)
+    EXPECT_EQ(2*a,b,"here's a message!")
 }
 
 end module

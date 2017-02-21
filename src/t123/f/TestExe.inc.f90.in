@@ -39,7 +39,7 @@ if( t123_RETURN_CODE/=0 )STOP 1
 
 #define _M_MACRO_SWITCH(_1,_2,_3,NAME,...) NAME
 
-#define EXPECT_OR_ASSERT(OPER,FATAL,ref,test,msg) t123_LAST_TEST_EVAL=(ref OPER test); if( .not.t123_LAST_TEST_EVAL )call t123_TestExe_addTestPartResult(__FILE__,__LINE__,#ref,""//ref,#test,""//test,#OPER,FATAL,msg)
+#define EXPECT_OR_ASSERT(OPER,FATAL,ref,test,msg) t123_LAST_TEST_EVAL=(ref OPER test); if( .not.t123_LAST_TEST_EVAL )call t123_TestExe_addTestPartResult(__FILE__,__LINE__,#ref,t123_printToString(ref),#test,t123_printToString(test),#OPER,FATAL,msg)
 
 #define EXPECT_EQ3(ref,test,msg) EXPECT_OR_ASSERT(==,.FALSE.,ref,test,msg)
 #define EXPECT_EQ2(ref,test) EXPECT_OR_ASSERT(==,.FALSE.,ref,test,"")

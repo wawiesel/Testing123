@@ -41,7 +41,7 @@ MACRO( ADD_FORTRAN_TEST )
   # track of line numbers DESPITE having expanded } to two lines!
   SET( copied_n_file "${CMAKE_CURRENT_BINARY_DIR}/${test_name}.newline.f90" )
   FILE( GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${test_name}.newline.cmake" CONTENT
-  "FILE( READ \"${copied_file}\" temp )\nSTRING( REPLACE \"{\" \"\" temp \"\${temp}\")\nSTRING( REGEX REPLACE \"![^\\n]*\" \"\" temp \"\${temp}\")\nSTRING( REGEX REPLACE \"\\n}\" \";end subroutine\n\#include \\\"t123/f/TEST_END.inc.f90\\\"\" temp \"\${temp}\")\nFILE( WRITE \"${copied_n_file}\" \"\${temp}\" )"
+  "FILE( READ \"${copied_file}\" temp )\nSTRING( REPLACE \"{\" \"\" temp \"\${temp}\")\nSTRING( REGEX REPLACE \"[\\n] *![^\\n]*\" \"\\n\" temp \"\${temp}\")\nSTRING( REGEX REPLACE \"\\n}\" \";end subroutine\n\#include \\\"t123/f/TEST_END.inc.f90\\\"\" temp \"\${temp}\")\nFILE( WRITE \"${copied_n_file}\" \"\${temp}\" )"
   )
   ADD_CUSTOM_COMMAND(
     OUTPUT ${copied_n_file}
