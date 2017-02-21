@@ -8,6 +8,7 @@ module t123_TestExe_M
   implicit none
 
   integer,save :: t123_RETURN_CODE=0
+  logical,save :: t123_LAST_TEST_EVAL=.false.
 
     interface
 
@@ -109,7 +110,7 @@ call t123_TestExe_c_addTest(C_FUNLOC(test_function),fileName//C_NULL_CHAR,fileLi
 
 end subroutine
 
-logical function t123_TestExe_addTestPartResult(fileName,fileLine,&
+character function t123_TestExe_addTestPartResult(fileName,fileLine,&
     refVariable,refValue,testVariable,testValue,compareOper,compare,fatal) result(goOn)
 character(*),intent(in) :: fileName
 integer,intent(in) :: fileLine
@@ -131,7 +132,7 @@ call t123_TestExe_c_addTestPartResult(fileName//C_NULL_CHAR,fileLine,k,&
     refVariable//C_NULL_CHAR,TRIM(ADJUSTL(refValue))//C_NULL_CHAR,&
     testVariable//C_NULL_CHAR,TRIM(ADJUSTL(testValue))//C_NULL_CHAR,&
     compareOper//C_NULL_CHAR)
-goOn = compare
+goOn = ''
 end function
 
 subroutine t123_TestExe_init()
