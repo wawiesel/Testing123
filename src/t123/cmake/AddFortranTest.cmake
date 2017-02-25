@@ -31,6 +31,12 @@ MACRO( ADD_FORTRAN_TEST )
     STRING(STRIP ${ADD_FORTRAN_TEST_INCLUDE_DIR} ADD_FORTRAN_TEST_INCLUDE_DIR)
     SET(includes -I${ADD_FORTRAN_TEST_INCLUDE_DIR} )
   ENDIF()
+  # Add locals.
+  GET_PROPERTY( dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES )
+  FOREACH( dir ${dirs} )
+    STRING(STRIP ${dir} dir)
+    SET(includes "${includes} -I${dir}" )
+  ENDFOREACH()
   SET( copied_file "${CMAKE_CURRENT_BINARY_DIR}/${test_file}" )
 
   # This is a tricky way to deal with endsubroutine;endsubroutine being
