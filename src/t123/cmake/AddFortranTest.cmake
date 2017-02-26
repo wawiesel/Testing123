@@ -35,7 +35,7 @@ MACRO( ADD_FORTRAN_TEST )
   GET_PROPERTY( dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES )
   FOREACH( dir ${dirs} )
     STRING(STRIP ${dir} dir)
-    SET(includes "${includes} -I${dir}" )
+    LIST(APPEND includes "-I${dir}" )
   ENDFOREACH()
   SET( copied_file "${CMAKE_CURRENT_BINARY_DIR}/${test_file}" )
 
