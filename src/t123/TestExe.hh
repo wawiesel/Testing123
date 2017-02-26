@@ -1,8 +1,11 @@
 #ifndef t123_TestExe_HH
 #define t123_TestExe_HH
 
-// All the magic macros come from here!
+// All the magic GoogleTest macros come from here!
 #include <gtest/gtest.h>
+
+// We added our own here!
+#include "internal/AdditionalMacros.hh"
 
 namespace t123
 {
