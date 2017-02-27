@@ -22,6 +22,7 @@ SET(SOURCES ${CXX_SOURCES})
 # Install CXX headers.
 SET(CXX_HEADERS
     t123/TestExe.hh
+    t123/internal/AdditionalMacros.hh
     t123/internal/c_linkage.h
 )
 INSTALL(FILES ${CXX_HEADERS} DESTINATION "include/t123/")
