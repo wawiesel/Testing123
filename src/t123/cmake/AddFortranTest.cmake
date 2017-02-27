@@ -37,7 +37,6 @@ MACRO( T123_AddFortranTest )
   # Then we need to run the C preprocessor on it.
   # The T123_AddFortranTest_INCLUDE_DIR is set in Testing123/src/CMakeLists.txt!
   SET(includes )
-  MESSAGE(STATUS "T123_AddFortranTest_INCLUDE_DIR=${T123_AddFortranTest_INCLUDE_DIR}")
   IF( DEFINED T123_AddFortranTest_INCLUDE_DIR )
     STRING(STRIP ${T123_AddFortranTest_INCLUDE_DIR} T123_AddFortranTest_INCLUDE_DIR)
     LIST(APPEND includes "-I${T123_AddFortranTest_INCLUDE_DIR}" )
@@ -48,7 +47,6 @@ MACRO( T123_AddFortranTest )
     STRING(STRIP ${dir} dir)
     LIST(APPEND includes "-I${dir}" )
   ENDFOREACH()
-  MESSAGE(STATUS "includes=${includes}")
   SET( copied_file "${CMAKE_CURRENT_BINARY_DIR}/${test_file}" )
 
   # This is a tricky way to deal with endsubroutine;endsubroutine being
