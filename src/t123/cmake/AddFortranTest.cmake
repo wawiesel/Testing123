@@ -93,6 +93,10 @@ MACRO( T123_AddFortranTest )
     DEPENDS ${preprocessed_file}
   )
 
+  # Add both source and binary dirs for includes and fortran modules.
+  INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_SOURCE_DIR}" )
+  INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_BINARY_DIR}" )
+
   # Finally we can add the test with the final output.
   TRIBITS_ADD_EXECUTABLE_AND_TEST( ${test_name}
     SOURCES

@@ -12,6 +12,10 @@ MACRO( T123_AddCxxTest )
   # prevent collisions with C++/C tests of the same base name.
   STRING(REPLACE "." "_" test_name "${test_file}" )
 
+  # Add both source and binary dirs for includes and fortran modules.
+  INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_SOURCE_DIR}" )
+  INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_BINARY_DIR}" )
+
   TRIBITS_ADD_EXECUTABLE_AND_TEST( ${test_name}
     SOURCES
       ${test_file}
