@@ -27,6 +27,10 @@ MACRO( T123_AddFortranTest )
   STRING(REPLACE "." "_" test_name "${test_file}" )
 
   # First, we need to copy the file in.
+  IF( NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${test_file}" )
+    MESSAGE(FATAL_ERROR "[Testing123] test file for AddFortranTest(${CMAKE_CURRENT_SOURCE_DIR}/${test_file}) does not exist!")
+  ENDIF()
+
   TRIBITS_COPY_FILES_TO_BINARY_DIR( COPY_${test_name}
       SOURCE_FILES
         ${test_file}
@@ -57,7 +61,7 @@ MACRO( T123_AddFortranTest )
   # track of line numbers DESPITE having expanded } to two lines!
   SET( copied_n_file "${CMAKE_CURRENT_BINARY_DIR}/${test_name}.newline.f90" )
   FILE( GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${test_name}.newline.cmake" CONTENT
-  "FILE( READ \"${copied_file}\" temp )\nSTRING( REPLACE \"{\" \"\" temp \"\${temp}\")\nSTRING( REGEX REPLACE \"[\\n] *![^\\n]*\" \"\\n\" temp \"\${temp}\")\nSTRING( REGEX REPLACE \"\\n}\" \";end subroutine\n\#include \\\"t123/internal/TEST_END.f90i\\\"\" temp \"\${temp}\")\nFILE( WRITE \"${copied_n_file}\" \"\${temp}\" )"
+  "FILE( READ \"${copied_file}\" temp )\nSTRING( REPLACE \"{\" \"\" temp \"\${temp}\")\nSTRING( REGEX REPLACE \"[\\n] *![^\\n]*\" \"\\n\" temp \"\${temp}\")\nSTRING( REGEX REPLACE \"\\n *}\" \";end subroutine\n\#include \\\"t123/internal/TEST_END.f90i\\\"\" temp \"\${temp}\")\nFILE( WRITE \"${copied_n_file}\" \"\${temp}\" )"
   )
   ADD_CUSTOM_COMMAND(
     OUTPUT ${copied_n_file}
