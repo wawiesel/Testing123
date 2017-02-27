@@ -4,7 +4,7 @@ MACRO( T123_AddCxxTest )
   LIST( REMOVE_AT args 0 )
 
   #Enable pthread.
-  BOTG_AddCompilerFlags( CXX ANY "Linux"
+  botgAddCompilerFlags( CXX ANY "Linux"
       "-pthread"
   )
 

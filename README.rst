@@ -14,7 +14,7 @@ declaring unit tests.
 .. code-block:: cmake
 
     # MyPackage/src/tests/CMakeLists.txt
-    T123_AddFortranTest( tstMyTestFile.f90 )
+    t123AddFortranTest( tstMyTestFile.f90 )
     T123_AddCxxTest( tstMyTestFile.cc )
     
 All the heavy lifting is done by the beautiful GoogleTest C++ unit 
@@ -27,7 +27,7 @@ computing as the main target application.
 - Support for additional comparison macros, such as vector comparisons
   or relative differences.
 
-In the end, T123_AddFortranTest or T123_AddCxxTest will call 
+In the end, t123AddFortranTest or T123_AddCxxTest will call 
 `TRIBITS_ADD_EXECUTABLE_AND_TEST <https://tribits.org/doc/TribitsDevelopersGuide.html#tribits-add-executable-and-test>`_,
 so the possibilities are endless.
 
@@ -104,7 +104,7 @@ the strategy in Testing123's CMakeLists.txt file.
 
     CMAKE_MINIMUM_REQUIRED(VERSION 3.0 FATAL_ERROR)
     INCLUDE( "${CMAKE_SOURCE_DIR}/external/BootsOnTheGround/cmake/BOTG_INCLUDE.cmake" )
-    BOTG_ConfigureProject( "${CMAKE_SOURCE_DIR}" )
+    botgConfigureProject( "${CMAKE_SOURCE_DIR}" )
     TRIBITS_PROJECT_ENABLE_ALL()
 
 The first include handles all the TriBITS setup and everything else. If you

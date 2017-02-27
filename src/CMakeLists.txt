@@ -4,9 +4,9 @@ TRIBITS_PACKAGE( Testing123 )
 INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_SOURCE_DIR}" )
 
 # Set C++ standard.
-BOTG_UseCxxStandard( 11 )
-BOTG_MinimumCompilerVersion( CXX GNU 4.8 )
-BOTG_AddCompilerFlags( CXX Intel Linux
+botgUseCxxStandard( 11 )
+botgMinimumCompilerVersion( CXX GNU 4.8 )
+botgAddCompilerFlags( CXX Intel Linux
     "-fp-model source"
 )
 
@@ -43,8 +43,8 @@ IF(${PROJECT_NAME}_ENABLE_Fortran)
     INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_BINARY_DIR}" )
 
     # 4.9 is required so that C_LOC works as expected.
-    BOTG_MinimumCompilerVersion( Fortran GNU 4.9 )
-    BOTG_AddCompilerFlags( Fortran Intel Linux
+    botgMinimumCompilerVersion( Fortran GNU 4.9 )
+    botgAddCompilerFlags( Fortran Intel Linux
         " -names lowercase"
         " -fp-model source"
         " -fpp"
@@ -54,7 +54,7 @@ IF(${PROJECT_NAME}_ENABLE_Fortran)
     )
 
     # Enable Fortran goodies.
-    BOTG_EnableFortran(
+    botgEnableFortran(
         C_PREPROCESSOR
         UNLIMITED_LINE_LENGTH
     )

@@ -11,7 +11,7 @@
 
 #This function needs to be here instead of in BOTG.cmake so it can be part of a
 #Bootstrapping operation.
-MACRO( BOTG_DownloadExternalProjects external_projects )
+MACRO( botgDownloadExternalProjects external_projects )
     FOREACH( ep ${external_projects} )
         IF( NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${ep}" )
             MESSAGE( FATAL_ERROR "[BootsOnTheGround] cannot find external project download file=${ep}" )
@@ -36,7 +36,7 @@ SET(BOTG_BOOTSTRAP ON CACHE BOOL INTERNAL)
 # If we bootstrap, then set the source directory and update the projects.
 IF( BOTG_BOOTSTRAP )
     SET(BOTG_SOURCE_DIR "${CMAKE_SOURCE_DIR}/external/BootsOnTheGround" CACHE PATH INTERNAL)
-    BOTG_DownloadExternalProjects(
+    botgDownloadExternalProjects(
         external/BootsOnTheGround.in
     )
 #If we don't, then we are building BootsOnTheGround as a project so it's easy.

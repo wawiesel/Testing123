@@ -1,24 +1,24 @@
 # Optional fortran test.
 MACRO( T123_AddOptionalFortranTest )
     IF(${PROJECT_NAME}_ENABLE_Fortran)
-        T123_AddFortranTest( ${ARGV} )
+        t123AddFortranTest( ${ARGV} )
     ELSE()
         MESSAGE( STATUS "[Testing123] optional fortran test $ARGV0 is being disabled because ${PROJECT_NAME}_ENABLE_Fortran=${${PROJECT_NAME}_ENABLE_Fortran}...")
     ENDIF()
 ENDMACRO()
 
 # Required fortran test.
-MACRO( T123_AddFortranTest )
+MACRO( t123AddFortranTest )
   # We'll pass the non-processed arguments to the add_test below.
   SET(args ${ARGV})
   LIST( GET args 0 test_file )
   LIST( REMOVE_AT args 0 )
 
   # Enable fortran goodies.
-  BOTG_EnableFortran( C_PREPROCESSOR UNLIMITED_LINE_LENGTH )
+  botgEnableFortran( C_PREPROCESSOR UNLIMITED_LINE_LENGTH )
 
   #Enable pthread.
-  BOTG_AddCompilerFlags( Fortran "Clang|GNU" "Linux"
+  botgAddCompilerFlags( Fortran "Clang|GNU" "Linux"
       "-pthread"
   )
 
