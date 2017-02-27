@@ -1,4 +1,4 @@
-module t123_TestExe_M
+module t123_TestExe
   use ISO_C_BINDING
   ! TEST(TestCaseName,TestName)
   !    ...

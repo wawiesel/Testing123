@@ -1,6 +1,6 @@
 module tstTestExe_M
 
-#include "t123/f/TestExe.inc.f90"
+#include "t123/TestExe.f90i"
 
 implicit none
 

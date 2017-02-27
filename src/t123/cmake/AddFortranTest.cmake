@@ -1,4 +1,14 @@
-MACRO( ADD_FORTRAN_TEST )
+# Optional fortran test.
+MACRO( T123_AddOptionalFortranTest )
+    IF(${PROJECT_NAME}_ENABLE_Fortran)
+        T123_AddFortranTest( ${ARGV} )
+    ELSE()
+        MESSAGE( STATUS "[Testing123] optional fortran test $ARGV0 is being disabled because ${PROJECT_NAME}_ENABLE_Fortran=${${PROJECT_NAME}_ENABLE_Fortran}...")
+    ENDIF()
+ENDMACRO()
+
+# Required fortran test.
+MACRO( T123_AddFortranTest )
   # We'll pass the non-processed arguments to the add_test below.
   SET(args ${ARGV})
   LIST( GET args 0 test_file )
@@ -12,9 +22,9 @@ MACRO( ADD_FORTRAN_TEST )
       "-pthread"
   )
 
-  # Get the name without the extension and make some other key names.
-  GET_FILENAME_COMPONENT( test_file_we ${test_file} NAME_WE )
-  SET( test_name ${test_file_we}_f )
+  # Replace the "." with "_" to get a proper test name that will also
+  # prevent collisions with C++/C tests of the same base name.
+  STRING(REPLACE "." "_" test_name "${test_file}" )
 
   # First, we need to copy the file in.
   TRIBITS_COPY_FILES_TO_BINARY_DIR( COPY_${test_name}
@@ -25,11 +35,12 @@ MACRO( ADD_FORTRAN_TEST )
   )
 
   # Then we need to run the C preprocessor on it.
-  # The ADD_FORTRAN_TEST_INCLUDE_DIR is set in Testing123/src/CMakeLists.txt!
+  # The T123_AddFortranTest_INCLUDE_DIR is set in Testing123/src/CMakeLists.txt!
   SET(includes )
-  IF( ADD_FORTRAN_TEST_INCLUDE_DIR )
-    STRING(STRIP ${ADD_FORTRAN_TEST_INCLUDE_DIR} ADD_FORTRAN_TEST_INCLUDE_DIR)
-    LIST(APPEND includes "-I${ADD_FORTRAN_TEST_INCLUDE_DIR}" )
+  MESSAGE(STATUS "T123_AddFortranTest_INCLUDE_DIR=${T123_AddFortranTest_INCLUDE_DIR}")
+  IF( DEFINED T123_AddFortranTest_INCLUDE_DIR )
+    STRING(STRIP ${T123_AddFortranTest_INCLUDE_DIR} T123_AddFortranTest_INCLUDE_DIR)
+    LIST(APPEND includes "-I${T123_AddFortranTest_INCLUDE_DIR}" )
   ENDIF()
   # Add locals.
   GET_PROPERTY( dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES )
@@ -37,6 +48,7 @@ MACRO( ADD_FORTRAN_TEST )
     STRING(STRIP ${dir} dir)
     LIST(APPEND includes "-I${dir}" )
   ENDFOREACH()
+  MESSAGE(STATUS "includes=${includes}")
   SET( copied_file "${CMAKE_CURRENT_BINARY_DIR}/${test_file}" )
 
   # This is a tricky way to deal with endsubroutine;endsubroutine being
@@ -47,7 +59,7 @@ MACRO( ADD_FORTRAN_TEST )
   # track of line numbers DESPITE having expanded } to two lines!
   SET( copied_n_file "${CMAKE_CURRENT_BINARY_DIR}/${test_name}.newline.f90" )
   FILE( GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${test_name}.newline.cmake" CONTENT
-  "FILE( READ \"${copied_file}\" temp )\nSTRING( REPLACE \"{\" \"\" temp \"\${temp}\")\nSTRING( REGEX REPLACE \"[\\n] *![^\\n]*\" \"\\n\" temp \"\${temp}\")\nSTRING( REGEX REPLACE \"\\n}\" \";end subroutine\n\#include \\\"t123/f/TEST_END.inc.f90\\\"\" temp \"\${temp}\")\nFILE( WRITE \"${copied_n_file}\" \"\${temp}\" )"
+  "FILE( READ \"${copied_file}\" temp )\nSTRING( REPLACE \"{\" \"\" temp \"\${temp}\")\nSTRING( REGEX REPLACE \"[\\n] *![^\\n]*\" \"\\n\" temp \"\${temp}\")\nSTRING( REGEX REPLACE \"\\n}\" \";end subroutine\n\#include \\\"t123/internal/TEST_END.f90i\\\"\" temp \"\${temp}\")\nFILE( WRITE \"${copied_n_file}\" \"\${temp}\" )"
   )
   ADD_CUSTOM_COMMAND(
     OUTPUT ${copied_n_file}

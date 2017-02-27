@@ -1,6 +1,6 @@
 !This file is to be INCLUDED in a test file.
 !
-!#include "t123/f/TestExe.inc.f90"
+!#include "t123/fortran/TestExe.f90i"
 !
 !It uses the TestExe module which contains
 !Fortran data structures for the test excecutation, as
@@ -8,7 +8,7 @@
 !special test definition macros.
 !
 
-use t123_TestExe_M
+use t123_TestExe
 
 @FUNDAMENTAL_MACROS_INC@
 
