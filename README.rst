@@ -6,7 +6,7 @@ Testing123 |build|
 
 CMake_/TriBITS_ unit testing for C++/Fortran
 
-.. image:: http://i.imgur.com/RjuuVG0.jpg
+.. image:: https://c1.staticflickr.com/4/3884/33135230286_66ec1153a4_b.jpg
 
 Testing123 provides two macros to use in CMakeLists.txt files for 
 declaring unit tests.
