@@ -1,4 +1,4 @@
-MACRO( T123_AddCxxTest )
+MACRO( t123AddCxxTest )
   SET(args ${ARGV})
   LIST( GET args 0 test_file )
   LIST( REMOVE_AT args 0 )

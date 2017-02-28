@@ -15,7 +15,7 @@ declaring unit tests.
 
     # MyPackage/src/tests/CMakeLists.txt
     t123AddFortranTest( tstMyTestFile.f90 )
-    T123_AddCxxTest( tstMyTestFile.cc )
+    t123AddCxxTest( tstMyTestFile.cc )
     
 All the heavy lifting is done by the beautiful GoogleTest C++ unit 
 test framework. We just want to add a little layer on top, with scientific
@@ -27,7 +27,7 @@ computing as the main target application.
 - Support for additional comparison macros, such as vector comparisons
   or relative differences.
 
-In the end, t123AddFortranTest or T123_AddCxxTest will call 
+In the end, t123AddFortranTest or t123AddCxxTest will call 
 `TRIBITS_ADD_EXECUTABLE_AND_TEST <https://tribits.org/doc/TribitsDevelopersGuide.html#tribits-add-executable-and-test>`_,
 so the possibilities are endless.
 

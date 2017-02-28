@@ -1,1 +1,1 @@
-INCLUDE( "${BOTG_SOURCE_DIR}/TPLsList.cmake" )
+INCLUDE( "${BOTG_ROOT_DIR}/TPLsList.cmake" )
