@@ -1,5 +1,5 @@
 # Optional fortran test.
-MACRO( T123_AddOptionalFortranTest )
+MACRO( t123AddOptionalFortranTest )
     IF(${PROJECT_NAME}_ENABLE_Fortran)
         t123AddFortranTest( ${ARGV} )
     ELSE()
