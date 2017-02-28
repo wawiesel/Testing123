@@ -1,2 +1,2 @@
 t123AddCxxTest( tstTestExe.cc )
-T123_AddOptionalFortranTest( tstTestExe.f90 )
+t123AddOptionalFortranTest( tstTestExe.f90 )
