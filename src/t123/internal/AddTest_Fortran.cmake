@@ -1,14 +1,5 @@
-# Optional fortran test.
-MACRO( t123AddOptionalFortranTest )
-    IF(${PROJECT_NAME}_ENABLE_Fortran)
-        t123AddFortranTest( ${ARGV} )
-    ELSE()
-        MESSAGE( STATUS "[Testing123] optional fortran test $ARGV0 is being disabled because ${PROJECT_NAME}_ENABLE_Fortran=${${PROJECT_NAME}_ENABLE_Fortran}...")
-    ENDIF()
-ENDMACRO()
-
 # Required fortran test.
-MACRO( t123AddFortranTest )
+MACRO( t123AddTest_Fortran )
   # We'll pass the non-processed arguments to the add_test below.
   SET(args ${ARGV})
   LIST( GET args 0 test_file )
@@ -26,9 +17,11 @@ MACRO( t123AddFortranTest )
   # prevent collisions with C++/C tests of the same base name.
   STRING(REPLACE "." "_" test_name "${test_file}" )
 
+  MESSAGE(STATUS "[Testing123] adding Fortran test=${test_name} from test_file='${test_file}'.")
+
   # First, we need to copy the file in.
   IF( NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${test_file}" )
-    MESSAGE(FATAL_ERROR "[Testing123] test file for AddFortranTest(${CMAKE_CURRENT_SOURCE_DIR}/${test_file}) does not exist!")
+    MESSAGE(FATAL_ERROR "[Testing123] test file for AddTest_Fortran(${CMAKE_CURRENT_SOURCE_DIR}/${test_file}) does not exist!")
   ENDIF()
 
   TRIBITS_COPY_FILES_TO_BINARY_DIR( COPY_${test_name}
@@ -39,11 +32,11 @@ MACRO( t123AddFortranTest )
   )
 
   # Then we need to run the C preprocessor on it.
-  # The T123_AddFortranTest_INCLUDE_DIR is set in Testing123/src/CMakeLists.txt!
+  # The T123_AddTest_Fortran_INCLUDE_DIR is set in Testing123/src/CMakeLists.txt!
   SET(includes )
-  IF( DEFINED T123_AddFortranTest_INCLUDE_DIR )
-    STRING(STRIP ${T123_AddFortranTest_INCLUDE_DIR} T123_AddFortranTest_INCLUDE_DIR)
-    LIST(APPEND includes "-I${T123_AddFortranTest_INCLUDE_DIR}" )
+  IF( DEFINED T123_AddTest_Fortran_INCLUDE_DIR )
+    STRING(STRIP ${T123_AddTest_Fortran_INCLUDE_DIR} T123_AddTest_Fortran_INCLUDE_DIR)
+    LIST(APPEND includes "-I${T123_AddTest_Fortran_INCLUDE_DIR}" )
   ENDIF()
   # Add locals.
   GET_PROPERTY( dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES )

@@ -103,9 +103,12 @@ IF(${PROJECT_NAME}_ENABLE_Fortran)
 
 ENDIF()
 
-# Add special unit test creation command.
-INCLUDE( t123/cmake/AddCxxTest.cmake )
-INCLUDE( t123/cmake/AddFortranTest.cmake )
+# Internal unit test commands.
+INCLUDE( t123/internal/AddTest_Fortran.cmake )
+INCLUDE( t123/internal/AddTest_CXX.cmake )
+
+# Public unit test command.
+INCLUDE( t123/AddTest.cmake )
 
 # Add this package's test directory.
 TRIBITS_ADD_TEST_DIRECTORIES( t123/test )

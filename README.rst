@@ -8,16 +8,16 @@ CMake_/TriBITS_ unit testing for C++/Fortran
 
 .. image:: https://c1.staticflickr.com/4/3884/33135230286_66ec1153a4_b.jpg
 
-Testing123 provides two macros to use in CMakeLists.txt files for 
+Testing123 provides two macros to use in CMakeLists.txt files for
 declaring unit tests.
 
 .. code-block:: cmake
 
     # MyPackage/src/tests/CMakeLists.txt
-    t123AddFortranTest( tstMyTestFile.f90 )
-    t123AddCxxTest( tstMyTestFile.cc )
-    
-All the heavy lifting is done by the beautiful GoogleTest C++ unit 
+    t123AddTest( tstMyTestFile.f90 )
+    t123AddTest( tstMyTestFile.cc )
+
+All the heavy lifting is done by the beautiful GoogleTest C++ unit
 test framework. We just want to add a little layer on top, with scientific
 computing as the main target application.
 
@@ -27,7 +27,7 @@ computing as the main target application.
 - Support for additional comparison macros, such as vector comparisons
   or relative differences.
 
-In the end, t123AddFortranTest or t123AddCxxTest will call 
+In the end, t123AddTest will call
 `TRIBITS_ADD_EXECUTABLE_AND_TEST <https://tribits.org/doc/TribitsDevelopersGuide.html#tribits-add-executable-and-test>`_,
 so the possibilities are endless.
 
