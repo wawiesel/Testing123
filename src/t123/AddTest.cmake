@@ -1,12 +1,12 @@
-FUNCTION( t123AddTest )
-  LIST( GET ARGV 0 test_file )
+MACRO( t123AddTest )
+  SET( test_file "${ARGV0}")
 
   #First get the extension. It could be .f90 or .cpp or .f90.in
   GET_FILENAME_COMPONENT(extension "${test_file}" EXT)
 
   #Remove the last ".in" and first "." if it exists
-  STRING(REGEX REPLACE "\\.in$" "" extension ${extension})
-  STRING(REGEX REPLACE "^\\." "" extension ${extension})
+  STRING(REGEX REPLACE "\\.in$" "" extension "${extension}")
+  STRING(REGEX REPLACE "^\\." "" extension "${extension}")
 
   #Defines the extensions for each type.
   SET( CXX_match ";cpp;cxx;cc;C;" )
@@ -34,4 +34,4 @@ FUNCTION( t123AddTest )
     MESSAGE(FATAL_ERROR "[Testing123] could not determine the language of the test='${test_file}'! CXX tests have extensions: ${CXX_match}. Fortran tests have extensions: ${Fortran_match}.")
   ENDIF()
 
-ENDFUNCTION()
+ENDMACRO()
