@@ -4,6 +4,7 @@ TRIBITS_PACKAGE( Testing123 )
 INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_SOURCE_DIR}" )
 
 # Set C++ standard.
+botgProcessTPLS()
 botgUseCxxStandard( 11 )
 botgMinimumCompilerVersion( CXX GNU 4.8 )
 botgAddCompilerFlags( CXX Intel Linux
