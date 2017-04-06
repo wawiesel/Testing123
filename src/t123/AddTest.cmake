@@ -1,3 +1,7 @@
+# Internal unit test commands.
+INCLUDE( t123/internal/AddTest_Fortran.cmake )
+INCLUDE( t123/internal/AddTest_CXX.cmake )
+
 MACRO( t123AddTest )
   SET( test_file "${ARGV0}")
 
@@ -23,7 +27,7 @@ MACRO( t123AddTest )
           t123AddTest_Fortran( "${ARGV}" )
         ENDIF()
       ELSE()
-        MESSAGE( STATUS "[Testing123] test='${test_file}' disabled because ${PROJECT_NAME}_ENABLE_${lang}=${${PROJECT_NAME}_ENABLE_${lang}}...")
+        MESSAGE( WARNING "[Testing123] test='${test_file}' disabled because ${PROJECT_NAME}_ENABLE_${lang}=${${PROJECT_NAME}_ENABLE_${lang}}...")
       ENDIF()
       SET(found true)
       BREAK()

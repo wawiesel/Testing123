@@ -1,5 +1,5 @@
-#include "../TestExe.hh"
-#include "STEAL_PRIVATE_METHOD.hh"
+#include "t123/TestExe.hh"
+#include "t123/internal/STEAL_PRIVATE_METHOD.hh"
 
 namespace testing
 {

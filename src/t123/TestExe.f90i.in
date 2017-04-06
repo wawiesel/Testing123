@@ -1,6 +1,6 @@
 !This file is to be INCLUDED in a test file.
 !
-!#include "t123/fortran/TestExe.f90i"
+!#include "t123/TestExe.f90i"
 !
 !It uses the TestExe module which contains
 !Fortran data structures for the test excecutation, as
@@ -10,7 +10,288 @@
 
 use t123_TestExe
 
-@FUNDAMENTAL_MACROS_INC@
+#ifndef _M_FUNDAMENTAL_MACROS_HH
+#define _M_FUNDAMENTAL_MACROS_HH
+
+#define _M_CAT(a, ...) _M_PRIMITIVE_CAT(a, __VA_ARGS__)
+#define _M_PRIMITIVE_CAT(a, ...) a ## __VA_ARGS__
+
+#define _M_IIF(c) _M_PRIMITIVE_CAT(_M_IIF_, c)
+#define _M_IIF_0(t, ...) __VA_ARGS__
+#define _M_IIF_1(t, ...) t
+
+#define _M_COMPL(b) _M_PRIMITIVE_CAT(_M_COMPL_, b)
+#define _M_COMPL_0 1
+#define _M_COMPL_1 0
+
+#define _M_BITAND(x) _M_PRIMITIVE_CAT(_M_BITAND_, x)
+#define _M_BITAND_0(y) 0
+#define _M_BITAND_1(y) y
+
+#define _M_BITAND(x) _M_PRIMITIVE_CAT(_M_BITAND_, x)
+#define _M_BITAND_0(y) 0
+#define _M_BITAND_1(y) y
+
+#define _M_INC(x) _M_PRIMITIVE_CAT(_M_INC_, x)
+#define _M_INC_0 1
+#define _M_INC_1 2
+#define _M_INC_2 3
+#define _M_INC_3 4
+#define _M_INC_4 5
+#define _M_INC_5 6
+#define _M_INC_6 7
+#define _M_INC_7 8
+#define _M_INC_8 9
+#define _M_INC_9 10
+#define _M_INC_10 11
+#define _M_INC_11 12
+#define _M_INC_12 13
+#define _M_INC_13 14
+#define _M_INC_14 15
+#define _M_INC_15 16
+#define _M_INC_16 17
+#define _M_INC_17 18
+#define _M_INC_18 19
+#define _M_INC_19 20
+#define _M_INC_20 21
+#define _M_INC_21 22
+#define _M_INC_22 23
+#define _M_INC_23 24
+#define _M_INC_24 25
+#define _M_INC_25 26
+#define _M_INC_26 27
+#define _M_INC_27 28
+#define _M_INC_28 29
+#define _M_INC_29 30
+#define _M_INC_30 31
+#define _M_INC_31 32
+#define _M_INC_32 33
+#define _M_INC_33 34
+#define _M_INC_34 35
+#define _M_INC_35 36
+#define _M_INC_36 37
+#define _M_INC_37 38
+#define _M_INC_38 39
+#define _M_INC_39 40
+#define _M_INC_40 41
+#define _M_INC_41 42
+#define _M_INC_42 43
+#define _M_INC_43 44
+#define _M_INC_44 45
+#define _M_INC_45 46
+#define _M_INC_46 47
+#define _M_INC_47 48
+#define _M_INC_48 49
+#define _M_INC_49 50
+#define _M_INC_50 51
+#define _M_INC_51 52
+#define _M_INC_52 53
+#define _M_INC_53 54
+#define _M_INC_54 55
+#define _M_INC_55 56
+#define _M_INC_56 57
+#define _M_INC_57 58
+#define _M_INC_58 59
+#define _M_INC_59 60
+#define _M_INC_60 61
+#define _M_INC_61 62
+#define _M_INC_62 63
+#define _M_INC_63 64
+#define _M_INC_64 65
+#define _M_INC_65 66
+#define _M_INC_66 67
+#define _M_INC_67 68
+#define _M_INC_68 69
+#define _M_INC_69 70
+#define _M_INC_70 71
+#define _M_INC_71 72
+#define _M_INC_72 73
+#define _M_INC_73 74
+#define _M_INC_74 75
+#define _M_INC_75 76
+#define _M_INC_76 77
+#define _M_INC_77 78
+#define _M_INC_78 79
+#define _M_INC_79 80
+#define _M_INC_80 81
+#define _M_INC_81 82
+#define _M_INC_82 83
+#define _M_INC_83 84
+#define _M_INC_84 85
+#define _M_INC_85 86
+#define _M_INC_86 87
+#define _M_INC_87 88
+#define _M_INC_88 89
+#define _M_INC_89 90
+#define _M_INC_90 91
+#define _M_INC_91 92
+#define _M_INC_92 93
+#define _M_INC_93 94
+#define _M_INC_94 95
+#define _M_INC_95 96
+#define _M_INC_96 97
+#define _M_INC_97 98
+#define _M_INC_98 99
+#define _M_INC_99 100
+
+#define _M_DEC(x) _M_PRIMITIVE_CAT(_M_DEC_, x)
+#define _M_DEC_0 0
+#define _M_DEC_1 0
+#define _M_DEC_2 1
+#define _M_DEC_3 2
+#define _M_DEC_4 3
+#define _M_DEC_5 4
+#define _M_DEC_6 5
+#define _M_DEC_7 6
+#define _M_DEC_8 7
+#define _M_DEC_9 8
+#define _M_DEC_10 9
+#define _M_DEC_11 10
+#define _M_DEC_12 11
+#define _M_DEC_13 12
+#define _M_DEC_14 13
+#define _M_DEC_15 14
+#define _M_DEC_16 15
+#define _M_DEC_17 16
+#define _M_DEC_18 17
+#define _M_DEC_19 18
+#define _M_DEC_20 19
+#define _M_DEC_21 20
+#define _M_DEC_22 21
+#define _M_DEC_23 22
+#define _M_DEC_24 23
+#define _M_DEC_25 24
+#define _M_DEC_26 25
+#define _M_DEC_27 26
+#define _M_DEC_28 27
+#define _M_DEC_29 28
+#define _M_DEC_30 29
+#define _M_DEC_31 30
+#define _M_DEC_32 31
+#define _M_DEC_33 32
+#define _M_DEC_34 33
+#define _M_DEC_35 34
+#define _M_DEC_36 35
+#define _M_DEC_37 36
+#define _M_DEC_38 37
+#define _M_DEC_39 38
+#define _M_DEC_40 39
+#define _M_DEC_41 40
+#define _M_DEC_42 41
+#define _M_DEC_43 42
+#define _M_DEC_44 43
+#define _M_DEC_45 44
+#define _M_DEC_46 45
+#define _M_DEC_47 46
+#define _M_DEC_48 47
+#define _M_DEC_49 48
+#define _M_DEC_50 49
+#define _M_DEC_51 50
+#define _M_DEC_52 51
+#define _M_DEC_53 52
+#define _M_DEC_54 53
+#define _M_DEC_55 54
+#define _M_DEC_56 55
+#define _M_DEC_57 56
+#define _M_DEC_58 57
+#define _M_DEC_59 58
+#define _M_DEC_60 59
+#define _M_DEC_61 60
+#define _M_DEC_62 61
+#define _M_DEC_63 62
+#define _M_DEC_64 63
+#define _M_DEC_65 64
+#define _M_DEC_66 65
+#define _M_DEC_67 66
+#define _M_DEC_68 67
+#define _M_DEC_69 68
+#define _M_DEC_70 69
+#define _M_DEC_71 70
+#define _M_DEC_72 71
+#define _M_DEC_73 72
+#define _M_DEC_74 73
+#define _M_DEC_75 74
+#define _M_DEC_76 75
+#define _M_DEC_77 76
+#define _M_DEC_78 77
+#define _M_DEC_79 78
+#define _M_DEC_80 79
+#define _M_DEC_81 80
+#define _M_DEC_82 81
+#define _M_DEC_83 82
+#define _M_DEC_84 83
+#define _M_DEC_85 84
+#define _M_DEC_86 85
+#define _M_DEC_87 86
+#define _M_DEC_88 87
+#define _M_DEC_89 88
+#define _M_DEC_90 89
+#define _M_DEC_91 90
+#define _M_DEC_92 91
+#define _M_DEC_93 92
+#define _M_DEC_94 93
+#define _M_DEC_95 94
+#define _M_DEC_96 95
+#define _M_DEC_97 96
+#define _M_DEC_98 97
+#define _M_DEC_99 98
+#define _M_DEC_100 99
+
+#define _M_CHECK_N(x, n, ...) n
+#define _M_CHECK(...) _M_CHECK_N(__VA_ARGS__, 0,)
+#define _M_PROBE(x) x, 1,
+
+#define _M_IS_PAREN(x) _M_CHECK(_M_IS_PAREN_PROBE x)
+#define _M_IS_PAREN_PROBE(...) _M_PROBE(~)
+
+#define _M_NOT(x) _M_CHECK(_M_PRIMITIVE_CAT(_M_NOO_, x))
+#define _M_NOO_0 _M_PROBE(~)
+
+#define _M_BOOL(x) _M_COMPL(_M_NOT(x))
+#define _M_IF(c) _M_IIF(_M_BOOL(c))
+
+#define _M_EAT(...)
+#define _M_EXPAND(...) __VA_ARGS__
+#define _M_WHEN(c) _M_IF(c)(_M_EXPAND, _M_EAT)
+
+#define _M_EMPTY()
+#define _M_DEFER(id) id _M_EMPTY()
+#define _M_OBSTRUCT(...) __VA_ARGS__ _M_DEFER(_M_EMPTY)()
+#define _M_EXPAND(...) __VA_ARGS__
+
+#define _M_EVAL(...)  _M_EVAL1(_M_EVAL1(_M_EVAL1(__VA_ARGS__)))
+#define _M_EVAL1(...) _M_EVAL2(_M_EVAL2(_M_EVAL2(__VA_ARGS__)))
+#define _M_EVAL2(...) _M_EVAL3(_M_EVAL3(_M_EVAL3(__VA_ARGS__)))
+#define _M_EVAL3(...) _M_EVAL4(_M_EVAL4(_M_EVAL4(__VA_ARGS__)))
+#define _M_EVAL4(...) _M_EVAL5(_M_EVAL5(_M_EVAL5(__VA_ARGS__)))
+#define _M_EVAL5(...) __VA_ARGS__
+
+#define _M_REPEAT(count, macro, ...) \
+    _M_WHEN(count) \
+    ( \
+        _M_OBSTRUCT(_M_REPEAO_INDIRECT) () \
+        ( \
+            _M_DEC(count), macro, __VA_ARGS__ \
+        ) \
+        _M_OBSTRUCT(macro) \
+        ( \
+            _M_DEC(count), __VA_ARGS__ \
+        ) \
+    )
+#define _M_REPEAO_INDIRECT() _M_REPEAT
+
+#define _M_WHILE(pred, op, ...) \
+    _M_IF(pred(__VA_ARGS__)) \
+    ( \
+        _M_OBSTRUCT(_M_WHILE_INDIRECT) () \
+        ( \
+            pred, op, op(__VA_ARGS__) \
+        ), \
+        __VA_ARGS__ \
+    )
+#define _M_WHILE_INDIRECT() _M_WHILE
+
+#endif
 
 #define SETUP_TEST(A,B,i)\
 recursive subroutine _M_CAT(Test_,i)();;; \
