@@ -6,6 +6,15 @@ botgPackage( Testing123 )
 INCLUDE( t123/AddTest.cmake )
 #-------------------------------------------------------------------------------
 #
+# Set CXX options.
+#
+botgUseCxxStandard( 11 )
+botgMinimumCompilerVersion( CXX GNU 4.8 )
+botgAddCompilerFlags( CXX Intel Linux
+    "-fp-model source"
+)
+#-------------------------------------------------------------------------------
+#
 # Create CXX library.
 #
 botgLibrary( Testing123
@@ -17,28 +26,6 @@ botgLibrary( Testing123
         t123/TestExe.hh
         t123/internal/AdditionalMacros.hh
         t123/internal/c_linkage.h
-)
-#-------------------------------------------------------------------------------
-#
-# Set CXX options.
-#
-botgUseCxxStandard( 11 )
-botgMinimumCompilerVersion( CXX GNU 4.8 )
-botgAddCompilerFlags( CXX Intel Linux
-    "-fp-model source"
-)
-#-------------------------------------------------------------------------------
-#
-# Create a Fortran library (files ending in .in are automatically configured).
-#
-botgLibrary( Testing123_Fortran
-    SOURCES
-        t123/internal/TestExe.f90
-    HEADERS
-        t123/TestExe.f90i.in
-        t123/internal/TEST_END.f90i.in
-    LINK_TO
-        Testing123
 )
 #-------------------------------------------------------------------------------
 #
@@ -57,6 +44,20 @@ botgAddCompilerFlags( Fortran Intel Linux
     "-traceback"
     "-heap-arrays 100"
     "-assume byterecl"
+)
+#-------------------------------------------------------------------------------
+#
+# Create a Fortran library (files ending in .in are automatically configured).
+#
+botgLibrary( Testing123_Fortran
+    LANGUAGE Fortran
+    SOURCES
+        t123/internal/TestExe.f90
+    HEADERS
+        t123/TestExe.f90i.in
+        t123/internal/TEST_END.f90i.in
+    LINK_TO
+        Testing123
 )
 #-------------------------------------------------------------------------------
 #

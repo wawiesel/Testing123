@@ -1,10 +1,17 @@
-#Boilerplate main CMakeLists.txt file for BootsOnTheGround PROJECT.
+#
+# Boilerplate main CMakeLists.txt file for BootsOnTheGround PROJECT.
+#
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0 FATAL_ERROR)
+
 INCLUDE( "${CMAKE_SOURCE_DIR}/cmake/BOTG_INCLUDE.cmake" )
+
 botgProject()
+
 SET( ${PROJECT_NAME}_ENABLE_SECONDARY_TESTED_CODE OFF )
+
 PROJECT( "${PROJECT_NAME}"
     VERSION "${PROJECT_VERSION}"
-    LANGUAGES C CXX Fortran
+    LANGUAGES C Fortran CXX
 )
+
 botgEnd()
