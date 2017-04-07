@@ -1,17 +1,17 @@
+#
+# Boilerplate main CMakeLists.txt file for BootsOnTheGround PROJECT.
+#
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0 FATAL_ERROR)
 
-# This sets BOTG_ROOT_DIR which may be used later.
 INCLUDE( "${CMAKE_SOURCE_DIR}/cmake/BOTG_INCLUDE.cmake" )
 
-# Configure the project.
-botgConfigureProject( "${CMAKE_SOURCE_DIR}" )
-TRIBITS_PROJECT_ENABLE_ALL()
+botgProject()
 
-# Final print of all the variables for inspection.
-# For example: -D MATCH_VARIABLE_REGEX:STRING="" will print everything.
-#              -D MATCH_VARIABLE_REGEX:STRING="^BootsOnTheGround" will
-#                 print all the BootsOnTheGround variables.
-#
-IF( DEFINED MATCH_VARIABLE_REGEX )
-    botgPrintVar("${MATCH_VARIABLE_REGEX}")
-ENDIF()
+SET( ${PROJECT_NAME}_ENABLE_SECONDARY_TESTED_CODE OFF )
+
+PROJECT( "${PROJECT_NAME}"
+    VERSION "${PROJECT_VERSION}"
+    LANGUAGES C Fortran CXX
+)
+
+botgEnd()

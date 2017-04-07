@@ -1,3 +1,7 @@
+# Internal unit test commands.
+INCLUDE( t123/internal/AddTest_Fortran.cmake )
+INCLUDE( t123/internal/AddTest_CXX.cmake )
+
 MACRO( t123AddTest )
   SET( test_file "${ARGV0}")
 
