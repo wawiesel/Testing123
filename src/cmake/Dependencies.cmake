@@ -1,2 +1,4 @@
-TRIBITS_PACKAGE_DEFINE_DEPENDENCIES()
-botgAddTPL( LIB REQUIRED GTEST )
+botgPackageDependencies(
+    LIB_REQUIRED_PACKAGES
+        BootsOnTheGround_GTEST
+)
