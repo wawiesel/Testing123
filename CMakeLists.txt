@@ -4,9 +4,9 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0 FATAL_ERROR)
 
 INCLUDE( "${CMAKE_SOURCE_DIR}/cmake/BOTG_INCLUDE.cmake" )
-botgDownloadExternalProjects(
-    #external/Testing123.in
-)
+#botgDownloadExternalProjects(
+#    external/Testing123.in
+#)
 
 botgProject()
 
