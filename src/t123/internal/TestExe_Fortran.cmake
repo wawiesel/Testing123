@@ -1,8 +1,8 @@
 # Need this so that the macro can find the right directory.
-GLOBAL_SET( T123_AddTest_Fortran_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}")
+GLOBAL_SET( T123_TestExe_Fortran_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}")
 
 # Required fortran test.
-MACRO( t123AddTest_Fortran test_file )
+MACRO( t123TestExe_Fortran test_file )
 
     #Enable pthread.
     botgAddLinkerFlags( Clang|GNU Linux "-pthread" )
@@ -19,7 +19,7 @@ MACRO( t123AddTest_Fortran test_file )
 
     # First, we need to copy the file in.
     IF( NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${test_file}" )
-    MESSAGE(FATAL_ERROR "[Testing123] test file for AddTest_Fortran(${CMAKE_CURRENT_SOURCE_DIR}/${test_file}) does not exist!")
+    MESSAGE(FATAL_ERROR "[Testing123] test file for TestExe_Fortran(${CMAKE_CURRENT_SOURCE_DIR}/${test_file}) does not exist!")
     ENDIF()
 
     TRIBITS_COPY_FILES_TO_BINARY_DIR( COPY_${test_name}
@@ -30,11 +30,11 @@ MACRO( t123AddTest_Fortran test_file )
     )
 
     # Then we need to run the C preprocessor on it.
-    # The T123_AddTest_Fortran_INCLUDE_DIR is set in Testing123/src/CMakeLists.txt!
+    # The T123_TestExe_Fortran_INCLUDE_DIR is set in Testing123/src/CMakeLists.txt!
     SET(includes )
-    IF( DEFINED T123_AddTest_Fortran_INCLUDE_DIR )
-        STRING(STRIP ${T123_AddTest_Fortran_INCLUDE_DIR} T123_AddTest_Fortran_INCLUDE_DIR)
-        LIST(APPEND includes "-I${T123_AddTest_Fortran_INCLUDE_DIR}" )
+    IF( DEFINED T123_TestExe_Fortran_INCLUDE_DIR )
+        STRING(STRIP ${T123_TestExe_Fortran_INCLUDE_DIR} T123_TestExe_Fortran_INCLUDE_DIR)
+        LIST(APPEND includes "-I${T123_TestExe_Fortran_INCLUDE_DIR}" )
     ENDIF()
 
     # Add locals.

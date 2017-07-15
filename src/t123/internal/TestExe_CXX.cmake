@@ -1,4 +1,4 @@
-MACRO( t123AddTest_CXX test_file )
+MACRO( t123TestExe_CXX test_file )
 
     #Enable pthread.
     botgAddLinkerFlags( Clang|GNU Linux "-pthread" )

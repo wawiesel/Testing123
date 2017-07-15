@@ -1,5 +1,5 @@
-t123AddTest( tstTestExe.cc
+t123TestExe( tstTestExe.cc
     COMM serial
 )
-t123AddTest( tstTestExe.f90 )
-t123AddTest( tstCaseLimit.f90 )
+t123TestExe( tstTestExe.f90 )
+t123TestExe( tstCaseLimit.f90 )

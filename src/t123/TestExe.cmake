@@ -1,8 +1,8 @@
 # Internal unit test commands.
-INCLUDE( t123/internal/AddTest_Fortran.cmake )
-INCLUDE( t123/internal/AddTest_CXX.cmake )
+INCLUDE( t123/internal/TestExe_Fortran.cmake )
+INCLUDE( t123/internal/TestExe_CXX.cmake )
 
-MACRO( t123AddTest test_file )
+MACRO( t123TestExe test_file )
 
   #First get the extension. It could be .f90 or .cpp or .f90.in
   GET_FILENAME_COMPONENT(extension "${test_file}" EXT)
@@ -21,9 +21,9 @@ MACRO( t123AddTest test_file )
     IF( "${${lang}_match}" MATCHES ";${extension};" )
       IF( ${PROJECT_NAME}_ENABLE_${lang} )
         IF( ${lang} STREQUAL "CXX" )
-          t123AddTest_CXX( "${test_file}" "${ARGN}" )
+          t123TestExe_CXX( "${test_file}" "${ARGN}" )
         ELSE()
-          t123AddTest_Fortran( "${test_file}" "${ARGN}" )
+          t123TestExe_Fortran( "${test_file}" "${ARGN}" )
         ENDIF()
       ELSE()
         MESSAGE( STATUS "[Testing123] test='${test_file}' disabled because ${PROJECT_NAME}_ENABLE_${lang}=${${PROJECT_NAME}_ENABLE_${lang}}...")

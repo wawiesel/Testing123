@@ -3,7 +3,7 @@ botgPackage( Testing123 )
 #
 # Public unit test command.
 #
-INCLUDE( t123/AddTest.cmake )
+INCLUDE( t123/TestExe.cmake )
 #-------------------------------------------------------------------------------
 #
 # Set CXX options.
