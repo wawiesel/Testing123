@@ -2,12 +2,7 @@
 GLOBAL_SET( T123_AddTest_Fortran_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}")
 
 # Required fortran test.
-MACRO( t123AddTest_Fortran )
-
-    # We'll pass the non-processed arguments to the add_test below.
-    SET(args ${ARGV})
-    LIST( GET args 0 test_file )
-    LIST( REMOVE_AT args 0 )
+MACRO( t123AddTest_Fortran test_file )
 
     #Enable pthread.
     botgAddLinkerFlags( Clang|GNU Linux "-pthread" )
@@ -98,8 +93,9 @@ MACRO( t123AddTest_Fortran )
     TRIBITS_ADD_EXECUTABLE_AND_TEST( ${test_name}
         SOURCES
             ${final_file}
-        LINKER_LANGUAGE Fortran
-            ${args}
+        LINKER_LANGUAGE
+            Fortran
+        ${ARGN}
     )
 
 ENDMACRO()

@@ -1,8 +1,4 @@
-MACRO( t123AddTest_CXX )
-
-    SET(args ${ARGV})
-    LIST( GET args 0 test_file )
-    LIST( REMOVE_AT args 0 )
+MACRO( t123AddTest_CXX test_file )
 
     #Enable pthread.
     botgAddLinkerFlags( Clang|GNU Linux "-pthread" )
@@ -18,8 +14,10 @@ MACRO( t123AddTest_CXX )
 
     TRIBITS_ADD_EXECUTABLE_AND_TEST( ${test_name}
         SOURCES
-          ${test_file}
-        ${args}
+            ${test_file}
+        LINKER_LANGUAGE
+            CXX
+        ${ARGN}
     )
 
 ENDMACRO()
