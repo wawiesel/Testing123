@@ -5,7 +5,7 @@
 #include <gtest/gtest.h>
 
 // We added our own here!
-#include "internal/AdditionalMacros.hh"
+#include "internal/MORE_GTEST_MACROS.hh"
 
 namespace t123
 {
