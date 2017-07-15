@@ -1,5 +1,6 @@
 module t123_TestExe
   use ISO_C_BINDING
+  !
   ! TEST(TestCaseName,TestName)
   !    ...
   ! END_TEST
@@ -213,6 +214,8 @@ subroutine t123_TestExe_init()
     ! Call C initialization.
     call t123_TestExe_c_init(argc,argv)
 end subroutine
+
+subroutine Test_100(); write(*,*)'You cannot have more than 100 test cases in Fortran!'; stop; end subroutine
 
 subroutine t123_TestExe_finish()
 

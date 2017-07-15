@@ -24,7 +24,7 @@ botgLibrary( Testing123
         t123/internal/c_linkage.cc
     HEADERS
         t123/TestExe.hh
-        t123/internal/AdditionalMacros.hh
+        t123/internal/MORE_GTEST_MACROS.hh
         t123/internal/c_linkage.h
 )
 #-------------------------------------------------------------------------------

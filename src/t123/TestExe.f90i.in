@@ -10,8 +10,8 @@
 
 use t123_TestExe
 
-#ifndef _M_FUNDAMENTAL_MACROS_HH
-#define _M_FUNDAMENTAL_MACROS_HH
+#ifndef t123_TestExe_f90i_IN
+#define t123_TestExe_f90i_IN
 
 #define _M_CAT(a, ...) _M_PRIMITIVE_CAT(a, __VA_ARGS__)
 #define _M_PRIMITIVE_CAT(a, ...) a ## __VA_ARGS__
@@ -133,6 +133,8 @@ use t123_TestExe
 #define _M_INC_97 98
 #define _M_INC_98 99
 #define _M_INC_99 100
+#define _M_INC_100 101
+#define _M_INC_101 102
 
 #define _M_DEC(x) _M_PRIMITIVE_CAT(_M_DEC_, x)
 #define _M_DEC_0 0
@@ -236,6 +238,8 @@ use t123_TestExe
 #define _M_DEC_98 97
 #define _M_DEC_99 98
 #define _M_DEC_100 99
+#define _M_DEC_101 100
+#define _M_DEC_102 101
 
 #define _M_CHECK_N(x, n, ...) n
 #define _M_CHECK(...) _M_CHECK_N(__VA_ARGS__, 0,)
@@ -269,7 +273,7 @@ use t123_TestExe
 #define _M_REPEAT(count, macro, ...) \
     _M_WHEN(count) \
     ( \
-        _M_OBSTRUCT(_M_REPEAO_INDIRECT) () \
+        _M_OBSTRUCT(_M_REPEAT_INDIRECT) () \
         ( \
             _M_DEC(count), macro, __VA_ARGS__ \
         ) \
@@ -278,7 +282,7 @@ use t123_TestExe
             _M_DEC(count), __VA_ARGS__ \
         ) \
     )
-#define _M_REPEAO_INDIRECT() _M_REPEAT
+#define _M_REPEAT_INDIRECT() _M_REPEAT
 
 #define _M_WHILE(pred, op, ...) \
     _M_IF(pred(__VA_ARGS__)) \
@@ -290,8 +294,6 @@ use t123_TestExe
         __VA_ARGS__ \
     )
 #define _M_WHILE_INDIRECT() _M_WHILE
-
-#endif
 
 #define SETUP_TEST(A,B,i)\
 recursive subroutine _M_CAT(Test_,i)();;; \
@@ -322,6 +324,9 @@ if( t123_RETURN_CODE/=0 )STOP 1
 
 #define EXPECT_OR_ASSERT(OPER,FATAL,ref,test,msg) t123_LAST_TEST_EVAL=(ref OPER test); if( .not.t123_LAST_TEST_EVAL )call t123_TestExe_addTestPartResult(__FILE__,__LINE__,#ref,t123_printToString(ref),#test,t123_printToString(test),#OPER,FATAL,msg)
 
+!!!!!!!!!!!!!!!!!!!
+!!! EQUALS (EQ) !!!
+!!!!!!!!!!!!!!!!!!!
 #define EXPECT_EQ3(ref,test,msg) EXPECT_OR_ASSERT(==,.FALSE.,ref,test,msg)
 #define EXPECT_EQ2(ref,test) EXPECT_OR_ASSERT(==,.FALSE.,ref,test,"")
 #define EXPECT_EQ(...) _M_MACRO_SWITCH(__VA_ARGS__, EXPECT_EQ3, EXPECT_EQ2)(__VA_ARGS__)
@@ -330,3 +335,59 @@ if( t123_RETURN_CODE/=0 )STOP 1
 #define ASSERT_EQ2(ref,test) EXPECT_OR_ASSERT(==,.TRUE.,ref,test,"")
 #define ASSERT_EQ(...) _M_MACRO_SWITCH(__VA_ARGS__, ASSERT_EQ3, ASSERT_EQ2)(__VA_ARGS__)
 
+!!!!!!!!!!!!!!!!!!!!!!!
+!!! NOT EQUALS (NE) !!!
+!!!!!!!!!!!!!!!!!!!!!!!
+#define EXPECT_NE3(ref,test,msg) EXPECT_OR_ASSERT(/=,.FALSE.,ref,test,msg)
+#define EXPECT_NE2(ref,test) EXPECT_OR_ASSERT(/=,.FALSE.,ref,test,"")
+#define EXPECT_NE(...) _M_MACRO_SWITCH(__VA_ARGS__, EXPECT_NE3, EXPECT_NE2)(__VA_ARGS__)
+
+#define ASSERT_NE3(ref,test,msg) EXPECT_OR_ASSERT(/=,.TRUE.,ref,test,msg)
+#define ASSERT_NE2(ref,test) EXPECT_OR_ASSERT(/=,.TRUE.,ref,test,"")
+#define ASSERT_NE(...) _M_MACRO_SWITCH(__VA_ARGS__, ASSERT_NE3, ASSERT_NE2)(__VA_ARGS__)
+
+!!!!!!!!!!!!!!!!!!!!!!
+!!! LESS THAN (LT) !!!
+!!!!!!!!!!!!!!!!!!!!!!
+#define EXPECT_LT3(ref,test,msg) EXPECT_OR_ASSERT(<,.FALSE.,ref,test,msg)
+#define EXPECT_LT2(ref,test) EXPECT_OR_ASSERT(<,.FALSE.,ref,test,"")
+#define EXPECT_LT(...) _M_MACRO_SWITCH(__VA_ARGS__, EXPECT_LT3, EXPECT_LT2)(__VA_ARGS__)
+
+#define ASSERT_LT3(ref,test,msg) EXPECT_OR_ASSERT(<,.TRUE.,ref,test,msg)
+#define ASSERT_LT2(ref,test) EXPECT_OR_ASSERT(<,.TRUE.,ref,test,"")
+#define ASSERT_LT(...) _M_MACRO_SWITCH(__VA_ARGS__, ASSERT_LT3, ASSERT_LT2)(__VA_ARGS__)
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! LESS THAN OR EQUAL (LE) !!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#define EXPECT_LE3(ref,test,msg) EXPECT_OR_ASSERT(<=,.FALSE.,ref,test,msg)
+#define EXPECT_LE2(ref,test) EXPECT_OR_ASSERT(<=,.FALSE.,ref,test,"")
+#define EXPECT_LE(...) _M_MACRO_SWITCH(__VA_ARGS__, EXPECT_LE3, EXPECT_LE2)(__VA_ARGS__)
+
+#define ASSERT_LE3(ref,test,msg) EXPECT_OR_ASSERT(<=,.TRUE.,ref,test,msg)
+#define ASSERT_LE2(ref,test) EXPECT_OR_ASSERT(<=,.TRUE.,ref,test,"")
+#define ASSERT_LE(...) _M_MACRO_SWITCH(__VA_ARGS__, ASSERT_LE3, ASSERT_LE2)(__VA_ARGS__)
+
+!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! GREATER THAN (GT) !!!
+!!!!!!!!!!!!!!!!!!!!!!!!!
+#define EXPECT_GT3(ref,test,msg) EXPECT_OR_ASSERT(>,.FALSE.,ref,test,msg)
+#define EXPECT_GT2(ref,test) EXPECT_OR_ASSERT(>,.FALSE.,ref,test,"")
+#define EXPECT_GT(...) _M_MACRO_SWITCH(__VA_ARGS__, EXPECT_GT3, EXPECT_GT2)(__VA_ARGS__)
+
+#define ASSERT_GT3(ref,test,msg) EXPECT_OR_ASSERT(>,.TRUE.,ref,test,msg)
+#define ASSERT_GT2(ref,test) EXPECT_OR_ASSERT(>,.TRUE.,ref,test,"")
+#define ASSERT_GT(...) _M_MACRO_SWITCH(__VA_ARGS__, ASSERT_GT3, ASSERT_GT2)(__VA_ARGS__)
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! GREATER THAN OR EQUAL (GE) !!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#define EXPECT_GE3(ref,test,msg) EXPECT_OR_ASSERT(>=,.FALSE.,ref,test,msg)
+#define EXPECT_GE2(ref,test) EXPECT_OR_ASSERT(>=,.FALSE.,ref,test,"")
+#define EXPECT_GE(...) _M_MACRO_SWITCH(__VA_ARGS__, EXPECT_GE3, EXPECT_GE2)(__VA_ARGS__)
+
+#define ASSERT_GE3(ref,test,msg) EXPECT_OR_ASSERT(>=,.TRUE.,ref,test,msg)
+#define ASSERT_GE2(ref,test) EXPECT_OR_ASSERT(>=,.TRUE.,ref,test,"")
+#define ASSERT_GE(...) _M_MACRO_SWITCH(__VA_ARGS__, ASSERT_GE3, ASSERT_GE2)(__VA_ARGS__)
+
+#endif

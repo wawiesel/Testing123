@@ -51,14 +51,14 @@ MACRO( t123AddTest_Fortran )
     SET( copied_file "${CMAKE_CURRENT_BINARY_DIR}/${test_file}" )
 
     # This is a tricky way to deal with endsubroutine;endsubroutine being
-    # invalid fortran. We want to remove { and replace } with the equivalent
+    # invalid fortran. We want to replace 'END TEST' with the equivalent
     # of end subroutine ; end subroutine but on two lines. This is why we
     # couldn't use the c preprocessor--it has to be on one line for cpp.
     # The trickiest thing we do is put an include file in so we can keep
-    # track of line numbers DESPITE having expanded } to two lines!
+    # track of line numbers DESPITE having expanded 'END TEST' to two lines!
     SET( copied_n_file "${CMAKE_CURRENT_BINARY_DIR}/${test_name}.newline.f90" )
     FILE( GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${test_name}.newline.cmake" CONTENT
-    "FILE( READ \"${copied_file}\" temp )\nSTRING( REPLACE \"{\" \"\" temp \"\${temp}\")\nSTRING( REGEX REPLACE \"[\\n] *![^\\n]*\" \"\\n\" temp \"\${temp}\")\nSTRING( REGEX REPLACE \"\\n *}\" \";end subroutine\n\#include \\\"t123/internal/TEST_END.f90i\\\"\" temp \"\${temp}\")\nFILE( WRITE \"${copied_n_file}\" \"\${temp}\" )"
+    "FILE( READ \"${copied_file}\" temp )\nSTRING( REGEX REPLACE \"[\\n] *![^\\n]*\" \"\\n\" temp \"\${temp}\")\nSTRING( REGEX REPLACE \"\\n *END *TEST\" \";end subroutine\n\#include \\\"t123/internal/TEST_END.f90i\\\"\" temp \"\${temp}\")\nFILE( WRITE \"${copied_n_file}\" \"\${temp}\" )"
     )
     ADD_CUSTOM_COMMAND(
         OUTPUT ${copied_n_file}
