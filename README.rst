@@ -8,8 +8,46 @@ CMake_/TriBITS_ unit testing for C++/Fortran
 
 .. image:: https://c1.staticflickr.com/4/3884/33135230286_66ec1153a4_b.jpg
 
-Testing123 provides a ``t123TestFile`` CMake macro for a declaring a test
-file. There are many options, as shown below.
+Testing123 provides a ``t123TestFile`` CMake macro for a declaring a "test
+file". A "test file" can contain:
+
+  - tests with GoogleTest_ macros in C++
+  - tests with GoogleTest_-like macros in Fortran
+  - tests which pass/fail based on the return code (zero/non-zero)
+  - tests which pass/fail if STDOUT matches something
+  - tests to confirm a code block compiles
+  - tests to confirm a code block does not compile
+
+
+your/test/CMakeLists.txt
+------------------------
+
+Here's an example of usage. There is a CMakeLists.txt file that sits in a
+special "test" directory (the name can be anything). These files are actually
+the test files for this project.
+
+::
+
+    your/test/
+    ├── CMakeLists.txt
+    ├── failInternalTestCompileCase.cc
+    ├── failNoInternalTestCompileCase.cc
+    ├── failOverCaseLimit.f90
+    ├── passThisCompiles.cc
+    ├── passUnderCaseLimit.f90
+    ├── tst1.cc
+    ├── tst2.cc
+    ├── tstFAILS.cc
+    ├── tstPASSES.cc
+    ├── tstRegexFail.cc
+    ├── tstRegexPass.cc
+    ├── tstReturnCode0.cc
+    ├── tstReturnCode1.cc
+    ├── tstTestFile.cc
+    └── tstTestFile.f90
+
+The CMakeLists.txt file contains ``t123TestFile`` macro calls to register
+the various tests.
 
 .. code-block:: cmake
 
@@ -126,7 +164,59 @@ file. There are many options, as shown below.
         END_CASE_PASS_REGULAR_EXPRESSION
     )
 
-All the heavy lifting inside a test file is done by the beautiful GoogleTest
+The output of ``ctest`` would look something like this.
+
+::
+
+    Test project /Users/ww5/dev/Testing123/build
+          Start  1: Testing123_tstTestFile_cc
+     1/18 Test  #1: Testing123_tstTestFile_cc ..........................   Passed    0.01 sec
+          Start  2: Testing123_passThisCompiles_cc.Main
+     2/18 Test  #2: Testing123_passThisCompiles_cc.Main ................   Passed    0.22 sec
+          Start  3: Testing123_failInternalTestCompileCase_cc.Main
+     3/18 Test  #3: Testing123_failInternalTestCompileCase_cc.Main .....   Passed    0.22 sec
+          Start  4: Testing123_failNoInternalTestCompileCase_cc.Main
+     4/18 Test  #4: Testing123_failNoInternalTestCompileCase_cc.Main ...   Passed    0.22 sec
+          Start  5: Testing123_tstReturnCode0_cc
+     5/18 Test  #5: Testing123_tstReturnCode0_cc .......................   Passed    0.00 sec
+          Start  6: Testing123_tstReturnCode1_cc
+     6/18 Test  #6: Testing123_tstReturnCode1_cc .......................   Passed    0.00 sec
+          Start  7: Testing123_tstRegexPass_cc
+     7/18 Test  #7: Testing123_tstRegexPass_cc .........................   Passed    0.00 sec
+          Start  8: Testing123_tstRegexFail_cc
+     8/18 Test  #8: Testing123_tstRegexFail_cc .........................   Passed    0.00 sec
+          Start  9: Testing123_tstTestFile_f90
+     9/18 Test  #9: Testing123_tstTestFile_f90 .........................   Passed    0.00 sec
+          Start 10: Testing123_tst1_cc
+    10/18 Test #10: Testing123_tst1_cc .................................   Passed    0.00 sec
+          Start 11: Testing123_tst2_cc
+    11/18 Test #11: Testing123_tst2_cc .................................   Passed    0.00 sec
+          Start 12: Testing123_passUnderCaseLimit_f90.Main
+    12/18 Test #12: Testing123_passUnderCaseLimit_f90.Main .............   Passed    0.22 sec
+          Start 13: Testing123_failOverCaseLimit_f90.Main
+    13/18 Test #13: Testing123_failOverCaseLimit_f90.Main ..............   Passed    0.27 sec
+          Start 14: Testing123_tstPASSES_cc.Null
+    14/18 Test #14: Testing123_tstPASSES_cc.Null .......................   Passed    0.22 sec
+          Start 15: Testing123_tstPASSES_cc.OperatorParentheses
+    15/18 Test #15: Testing123_tstPASSES_cc.OperatorParentheses ........   Passed    0.24 sec
+          Start 16: Testing123_tstFAILS_cc.VectorNotDefined
+    16/18 Test #16: Testing123_tstFAILS_cc.VectorNotDefined ............   Passed    0.21 sec
+          Start 17: Testing123_tstFAILS_cc.BadMath
+    17/18 Test #17: Testing123_tstFAILS_cc.BadMath .....................   Passed    0.20 sec
+          Start 18: Testing123_tstFAILS_cc.PrivateCtor
+    18/18 Test #18: Testing123_tstFAILS_cc.PrivateCtor .................   Passed    0.20 sec
+
+    100% tests passed, 0 tests failed out of 18
+
+    Label Time Summary:
+    Testing123    =   0.03 sec (8 tests)
+
+    Total Test time (real) =   2.24 sec
+
+Strategy
+--------
+
+All the heavy lifting inside a test file is done by the beautiful GoogleTest_
 C++ unit test framework. We just want to add a little layer on top, with
 scientific computing as the main target application.
 
@@ -200,7 +290,7 @@ Embedded Packages
 -----------------
 
 Testing123_ bootstraps the BootsOnTheGround_ package and depends
-on GoogleTest as a Third Party Library (TPL). BootsOnTheGround includes TriBITS_.
+on GoogleTest_ as a Third Party Library (TPL). BootsOnTheGround includes TriBITS_.
 
 If you use Testing123 for testing a combined project/package,
 i.e. able to be built as both a TriBITS project for development/testing
@@ -231,6 +321,7 @@ extra baggage. Note the ``src`` directory at the end. This is the location
 of the CMakeLists.txt file corresponding to the **package**, not the
 **project** CMakeLists.txt which is at the root level.
 
+.. _GoogleTest: https://github.com/google/googletest
 .. _CMake: https://cmake.org/
 .. _TriBITS: https://tribits.org
 .. _BootsOnTheGround: http://github.com/wawiesel/BootsOnTheGround
