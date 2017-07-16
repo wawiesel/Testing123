@@ -147,22 +147,26 @@ the various tests.
     #
     #ENDIF()
     # 2) Just add the error message from other compilers as another one in the lists.
-    SET( REGEX_VectorNotDefined "undeclared identifier 'std'" )
-    SET( REGEX_BadMath "expected expression" )
-    SET( REGEX_PrivateCtor "private constructor" )
+    SET( REGEX_VectorNotDefined "undeclared identifier 'std';‘vector’ is not a member of ‘std’" )
+    SET( REGEX_BadMath "expected (primary-)?expression" )
+    SET( REGEX_PrivateCtor "private constructor;is private" )
 
     # This code will not compile, so it's natural state is failure.
     # So to make it a stronger test, we will turn it into a "passing" test
-    # with PASS expressions.
+    # with a PASS expression that matches the begin of anything ^.
+    # Then we match for failure.
     # Matching ANY of the FAIL REGEX, causes a failure.
     # Matching ANY of the PASS REGEX, causes a pass.
     t123TestFile( tstFAILS.cc
-        CASE_PASS_REGULAR_EXPRESSION
+        PASS_REGULAR_EXPRESSION "^"
+        CASE_FAIL_REGULAR_EXPRESSION
             VectorNotDefined "${REGEX_VectorNotDefined}"
             BadMath          "${REGEX_BadMath}"
             PrivateCtor      "${REGEX_PrivateCtor}"
-        END_CASE_PASS_REGULAR_EXPRESSION
+        END_CASE_FAIL_REGULAR_EXPRESSION
+        WILL_FAIL
     )
+
 
 The output of ``ctest`` would look something like this.
 
