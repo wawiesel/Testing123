@@ -1,4 +1,4 @@
-module t123_TestExe
+module t123_TestFile
   use ISO_C_BINDING
   !
   ! TEST(TestCaseName,TestName)
@@ -13,17 +13,17 @@ module t123_TestExe
 
     interface
 
-        subroutine t123_TestExe_c_init(argc,argv)&
-            BIND(C,name="t123_TestExe_c_init")
+        subroutine t123_TestFile_c_init(argc,argv)&
+            BIND(C,name="t123_TestFile_c_init")
               use ISO_C_BINDING
             integer(c_int), intent(in), value :: argc
             type(c_ptr), intent(in) :: argv(argc)
         end subroutine
 
-        subroutine t123_TestExe_c_addTestPartResult(file,line,k,&
+        subroutine t123_TestFile_c_addTestPartResult(file,line,k,&
             refVariable,refValue,&
             testVariable,testValue,compareOper)&
-            BIND(C,name="t123_TestExe_c_addTestPartResult")
+            BIND(C,name="t123_TestFile_c_addTestPartResult")
               use ISO_C_BINDING
             character(1) :: file
             integer(C_INT), VALUE          :: line
@@ -33,8 +33,8 @@ module t123_TestExe
             character(1) :: compareOper
         end subroutine
 
-        subroutine t123_TestExe_c_addTest(test_function,file,line,test_case_name,test_name)&
-            BIND(C,name="t123_TestExe_c_addTest")
+        subroutine t123_TestFile_c_addTest(test_function,file,line,test_case_name,test_name)&
+            BIND(C,name="t123_TestFile_c_addTest")
               use ISO_C_BINDING
             type(C_FUNPTR), VALUE :: test_function
             character(1) :: file
@@ -43,8 +43,8 @@ module t123_TestExe
             character(1) :: test_name
         end subroutine
 
-        integer function t123_TestExe_c_finish()&
-            BIND(C,name="t123_TestExe_c_finish")
+        integer function t123_TestFile_c_finish()&
+            BIND(C,name="t123_TestFile_c_finish")
               use ISO_C_BINDING
         end function
     end interface
@@ -139,7 +139,7 @@ c=a//t123_printToString(b)
 end function
 
 
-subroutine t123_TestExe_addTest(test_function,fileName,fileLine,test_case_name,test_name)
+subroutine t123_TestFile_addTest(test_function,fileName,fileLine,test_case_name,test_name)
 
   interface
     subroutine test_function()
@@ -151,11 +151,11 @@ integer(C_INT),intent(in) :: fileLine
 character(*),intent(in) :: test_case_name
 character(*),intent(in) :: test_name
 
-call t123_TestExe_c_addTest(C_FUNLOC(test_function),fileName//C_NULL_CHAR,fileLine,test_case_name//C_NULL_CHAR,test_name//C_NULL_CHAR)
+call t123_TestFile_c_addTest(C_FUNLOC(test_function),fileName//C_NULL_CHAR,fileLine,test_case_name//C_NULL_CHAR,test_name//C_NULL_CHAR)
 
 end subroutine
 
-subroutine t123_TestExe_addTestPartResult(fileName,fileLine,&
+subroutine t123_TestFile_addTestPartResult(fileName,fileLine,&
     refVariable,refValue,testVariable,testValue,compareOper,fatal,msg)
 character(*),intent(in) :: fileName
 integer,intent(in) :: fileLine
@@ -172,7 +172,7 @@ else if ( fatal )then
 else
     k=1
 end if
-call t123_TestExe_c_addTestPartResult(fileName//C_NULL_CHAR,fileLine,k,&
+call t123_TestFile_c_addTestPartResult(fileName//C_NULL_CHAR,fileLine,k,&
     refVariable//C_NULL_CHAR,TRIM(ADJUSTL(refValue))//C_NULL_CHAR,&
     testVariable//C_NULL_CHAR,TRIM(ADJUSTL(testValue))//C_NULL_CHAR,&
     compareOper//C_NULL_CHAR)
@@ -180,7 +180,7 @@ call t123_TestExe_c_addTestPartResult(fileName//C_NULL_CHAR,fileLine,k,&
 if( len_trim(msg) /= 0 )write(6,'(a)')msg
 end subroutine
 
-subroutine t123_TestExe_init()
+subroutine t123_TestFile_init()
     integer(c_int) :: argc
     type(c_ptr), allocatable :: argv(:)
     integer(c_int) :: l
@@ -212,14 +212,14 @@ subroutine t123_TestExe_init()
     end do
 
     ! Call C initialization.
-    call t123_TestExe_c_init(argc,argv)
+    call t123_TestFile_c_init(argc,argv)
 end subroutine
 
 subroutine Test_100(); write(*,*)'You cannot have more than 100 test cases in Fortran!'; stop; end subroutine
 
-subroutine t123_TestExe_finish()
+subroutine t123_TestFile_finish()
 
-t123_RETURN_CODE = t123_TestExe_c_finish()
+t123_RETURN_CODE = t123_TestFile_c_finish()
 
 end subroutine
 

@@ -1,9 +1,10 @@
 botgPackage( Testing123 )
 #===============================================================================
 #
-# Public unit test command.
+# Public unit test commands.
 #
-INCLUDE( t123/TestExe.cmake )
+INCLUDE( t123/TestFile.cmake )
+INCLUDE( t123/TestFiles.cmake )
 #-------------------------------------------------------------------------------
 #
 # Set CXX options.
@@ -19,11 +20,11 @@ botgAddCompilerFlags( CXX Intel Linux
 #
 botgLibrary( Testing123
     SOURCES
-        t123/internal/TestExe.cc
+        t123/internal/TestFile.cc
         t123/internal/cxx_unit_test_main.cc
         t123/internal/c_linkage.cc
     HEADERS
-        t123/TestExe.hh
+        t123/TestFile.hh
         t123/internal/MORE_GTEST_MACROS.hh
         t123/internal/c_linkage.h
 )
@@ -52,9 +53,9 @@ botgAddCompilerFlags( Fortran Intel Linux
 botgLibrary( Testing123_Fortran
     LANGUAGE Fortran
     SOURCES
-        t123/internal/TestExe.f90
+        t123/internal/TestFile.f90
     HEADERS
-        t123/TestExe.f90i.in
+        t123/TestFile.f90i.in
         t123/internal/TEST_END.f90i.in
     LINK_TO
         Testing123

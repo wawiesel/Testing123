@@ -1,7 +1,7 @@
 ! We need to test how many test cases are allowed.
-module tstCaseLimit_M
+module passUnderCaseLimit_M
 
-#include "t123/TestExe.f90i"
+#include "t123/TestFile.f90i"
 
 implicit none
 
@@ -311,7 +311,7 @@ END TEST
 end module
 
 program main
-use tstCaseLimit_M
+use passUnderCaseLimit_M
 !
 RUN_ALL_TESTS()
 !

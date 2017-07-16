@@ -1,0 +1,322 @@
+! We need to test how many test cases are allowed.
+module failOverCaseLimit_M
+
+#include "t123/TestFile.f90i"
+
+implicit none
+
+contains
+
+TEST( Case, 1 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 2 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 3 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 4 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 5 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 6 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 7 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 8 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 9 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 10 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 11 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 12 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 13 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 14 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 15 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 16 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 17 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 18 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 19 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 20 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 21 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 22 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 23 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 24 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 25 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 26 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 27 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 28 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 29 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 30 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 31 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 32 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 33 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 34 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 35 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 36 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 37 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 38 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 39 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 40 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 41 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 42 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 43 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 44 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 45 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 46 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 47 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 48 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 49 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 50 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 51 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 52 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 53 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 54 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 55 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 56 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 57 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 58 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 59 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 60 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 61 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 62 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 63 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 64 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 65 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 66 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 67 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 68 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 69 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 70 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 71 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 72 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 73 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 74 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 75 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 76 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 77 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 78 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 79 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 80 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 81 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 82 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 83 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 84 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 85 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 86 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 87 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 88 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 89 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 90 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 91 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 92 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 93 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 94 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 95 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 96 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 97 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 98 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 99 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 100 )
+    EXPECT_EQ(1,1)
+END TEST
+TEST( Case, 101 )
+    EXPECT_EQ(1,1)
+END TEST
+
+end module
+
+program main
+use failOverCaseLimit_M
+!
+RUN_ALL_TESTS()
+!
+end program
+

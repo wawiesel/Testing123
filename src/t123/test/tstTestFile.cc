@@ -1,4 +1,4 @@
-#include "t123/TestExe.hh"
+#include "t123/TestFile.hh"
 
 // Test basic expect on scalar values: string, int, double, float.
 TEST( Expect, Scalars )

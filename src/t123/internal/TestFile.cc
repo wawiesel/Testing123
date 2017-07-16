@@ -1,27 +1,29 @@
-#include "t123/TestExe.hh"
+#include "t123/TestFile.hh"
 #include "t123/internal/STEAL_PRIVATE_METHOD.hh"
+#include <cassert>
+#include <cstring>
 
 namespace testing
 {
 // creates type TestFunction
 typedef void ( *TestFunction )();
 
-class TestExeRunner : public ::testing::Test
+class TestFileRunner : public ::testing::Test
 {
   public:
     ::testing::TestFunction b_test_function;
-    TestExeRunner( TestFunction tf ) : b_test_function( tf ) {}
+    TestFileRunner( TestFunction tf ) : b_test_function( tf ) {}
     virtual void TestBody() { this->b_test_function(); }
 };
 
-class TestExeFactory : public ::testing::internal::TestFactoryBase
+class TestFileFactory : public ::testing::internal::TestFactoryBase
 {
   public:
     ::testing::TestFunction b_test_function;
-    TestExeFactory( TestFunction tf ) : b_test_function( tf ) {}
+    TestFileFactory( TestFunction tf ) : b_test_function( tf ) {}
     virtual ::testing::Test* CreateTest()
     {
-        return new TestExeRunner( this->b_test_function );
+        return new TestFileRunner( this->b_test_function );
     }
 };
 }
@@ -42,13 +44,13 @@ M_STEAL_PRIVATE_METHOD(::testing::UnitTest,
 namespace t123
 {
 // static
-void TestExe::init( int argc, char** argv )
+void TestFile::init( int argc, char** argv )
 {
     ::testing::InitGoogleTest( &argc, argv );
 }
 
 // static
-void TestExe::addTestPartResult( const char* file,
+void TestFile::addTestPartResult( const char* file,
                                  int line,
                                  int k,
                                  const char* refVariable,
@@ -62,9 +64,47 @@ void TestExe::addTestPartResult( const char* file,
     std::stringstream msg;
     if( k != 0 )
     {
-        auto eq_failure = ::testing::internal::EqHelper<false>::Compare(
-            refVariable, testVariable, refValue, testValue );
-        msg << eq_failure.message();
+        if( strncmp(compareOper,"==",2)==0 )
+        {
+            auto failure = ::testing::internal::EqHelper<false>::Compare(
+                refVariable, testVariable, refValue, testValue );
+            msg << failure.message();
+        }
+        else if( strncmp(compareOper,"/=",2)==0 )
+        {
+            auto failure = ::testing::internal::CmpHelperNE(
+                refVariable, testVariable, refValue, testValue );
+            msg << failure.message();
+        }
+        else if( strncmp(compareOper,"<",1)==0 )
+        {
+            auto failure = ::testing::internal::CmpHelperLT(
+                refVariable, testVariable, refValue, testValue );
+            msg << failure.message();
+        }
+        else if( strncmp(compareOper,">",1)==0 )
+        {
+            auto failure = ::testing::internal::CmpHelperGT(
+                refVariable, testVariable, refValue, testValue );
+            msg << failure.message();
+        }
+        else if( strncmp(compareOper,"<=",2)==0 )
+        {
+            auto failure = ::testing::internal::CmpHelperLE(
+                refVariable, testVariable, refValue, testValue );
+            msg << failure.message();
+        }
+        else if( strncmp(compareOper,">=",2)==0 )
+        {
+            auto failure = ::testing::internal::CmpHelperGE(
+                refVariable, testVariable, refValue, testValue );
+            msg << failure.message();
+        }
+        else
+        {
+            assert(false); //operator not recognized
+        }
+
         if( k < 0 )
         {
             kResult = ::testing::TestPartResult::kFatalFailure;
@@ -80,14 +120,14 @@ void TestExe::addTestPartResult( const char* file,
 }
 
 // static
-void TestExe::addTest(::testing::TestFunction test_function,
+void TestFile::addTest(::testing::TestFunction test_function,
                       const char* file,
                       int line,
                       const char* test_case_name,
                       const char* test_name )
 {
     ::testing::internal::TestFactoryBase* tef =
-        new ::testing::TestExeFactory( test_function );
+        new ::testing::TestFileFactory( test_function );
     auto x = ::testing::internal::MakeAndRegisterTestInfo(
         test_case_name,
         test_name,
@@ -103,5 +143,5 @@ void TestExe::addTest(::testing::TestFunction test_function,
 }
 
 // static
-int TestExe::finish() { return RUN_ALL_TESTS(); }
+int TestFile::finish() { return RUN_ALL_TESTS(); }
 }

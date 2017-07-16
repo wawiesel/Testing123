@@ -1,5 +1,5 @@
-#ifndef t123_TestExe_HH
-#define t123_TestExe_HH
+#ifndef t123_TestFile_HH
+#define t123_TestFile_HH
 
 // All the magic GoogleTest macros come from here!
 #include <gtest/gtest.h>
@@ -9,7 +9,7 @@
 
 namespace t123
 {
-class TestExe
+class TestFile
 {
   public:
     static void init( int argc, char** argv );

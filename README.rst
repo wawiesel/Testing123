@@ -8,18 +8,127 @@ CMake_/TriBITS_ unit testing for C++/Fortran
 
 .. image:: https://c1.staticflickr.com/4/3884/33135230286_66ec1153a4_b.jpg
 
-Testing123 provides two macros to use in CMakeLists.txt files for
-declaring unit tests.
+Testing123 provides a ``t123TestFile`` CMake macro for a declaring a test
+file. There are many options, as shown below.
 
 .. code-block:: cmake
 
-    # MyPackage/src/tests/CMakeLists.txt
-    t123AddTest( tstMyTestFile.f90 )
-    t123AddTest( tstMyTestFile.cc )
+    #------------------------------------------------------------------------------
+    # Create normal C++ test executable with TriBITS test flag for a serial
+    # communicator (as opposed to MPI).
+    t123TestFile( tstTestFile.cc
+        COMM serial
+    )
 
-All the heavy lifting is done by the beautiful GoogleTest C++ unit
-test framework. We just want to add a little layer on top, with scientific
-computing as the main target application.
+    #------------------------------------------------------------------------------
+    # Create a compilation test.
+    t123TestFile( passThisCompiles.cc
+      TEST_COMPILE
+    )
+
+    #------------------------------------------------------------------------------
+    # Create compilation test executable which contains TEST_COMPILE_CASE_*.
+    # A compilation test always needs to know whether it WILL_FAIL.
+    t123TestFile( failInternalTestCompileCase.cc
+      WILL_FAIL
+    )
+
+    #------------------------------------------------------------------------------
+    # Create compilation test executable which does not contain
+    # TEST_COMPILE_CASE_* and therefore requires TEST_COMPILE.
+    # A compilation test always needs to know whether it WILL_FAIL.
+    t123TestFile( failNoInternalTestCompileCase.cc
+      TEST_COMPILE
+      WILL_FAIL
+    )
+
+    #------------------------------------------------------------------------------
+    # Simple test with return code 0.
+    t123TestFile( tstReturnCode0.cc )
+
+    #------------------------------------------------------------------------------
+    # Simple test with return code 1.
+    t123TestFile( tstReturnCode1.cc
+      WILL_FAIL
+    )
+
+    #------------------------------------------------------------------------------
+    # Simple passing test with a regular expression.
+    t123TestFile( tstRegexPass.cc
+      PASS_REGULAR_EXPRESSION "hello world"
+    )
+
+    #------------------------------------------------------------------------------
+    # Simple failing test with a regular expression.
+    t123TestFile( tstRegexFail.cc
+      PASS_REGULAR_EXPRESSION "hello world"
+      WILL_FAIL
+    )
+
+    #------------------------------------------------------------------------------
+    # Create normal Fortran test executable.
+    t123TestFile( tstTestFile.f90 )
+
+    #------------------------------------------------------------------------------
+    # Version which allows a file list (given files are not GTest but just return 0).
+    t123TestFiles(
+        FILES
+            tst1.cc
+            tst2.cc
+    )
+
+    #------------------------------------------------------------------------------
+    # Compiler passing test (fails if it does find REGEX)
+    t123TestFile( passUnderCaseLimit.f90
+        TEST_COMPILE
+        FAIL_REGULAR_EXPRESSION "[Ee]rror"
+    )
+
+    #------------------------------------------------------------------------------
+    # Compiler failure test (fails if doesn't find REGEX).
+    t123TestFile( failOverCaseLimit.f90
+        TEST_COMPILE
+        FAIL_REGULAR_EXPRESSION "[Ee]rror"
+        WILL_FAIL
+    )
+
+    #------------------------------------------------------------------------------
+    # Compiler passing test with multiple cases in the same file without
+    # indicating 'TEST_COMPILE' because file has TEST_COMPILE_CASE_*.
+
+    t123TestFile( tstPASSES.cc )
+
+    #------------------------------------------------------------------------------
+    # Compilation failure test (multiple cases in the same file)
+
+    #There are two ways to add other compilers.
+    # 1) Use BOTG variables to construct.
+    #IF( "${BOTG_CXX_COMPILER}" STREQUAL "Clang" )
+    #
+    #ELSEIF( "${BOTG_CXX_COMPILER}" STREQUAL "Intel" )
+    #
+    #ENDIF()
+    # 2) Just add the error message from other compilers as another one in the lists.
+    SET( REGEX_VectorNotDefined "undeclared identifier 'std'" )
+    SET( REGEX_BadMath "expected expression" )
+    SET( REGEX_PrivateCtor "private constructor" )
+
+    # This code will not compile, so it's natural state is failure.
+    # So to make it a stronger test, we will turn it into a "passing" test
+    # with PASS expressions.
+    # Matching ANY of the FAIL REGEX, causes a failure.
+    # Matching ANY of the PASS REGEX, causes a pass.
+    t123TestFile( tstFAILS.cc
+        CASE_PASS_REGULAR_EXPRESSION
+            VectorNotDefined "${REGEX_VectorNotDefined}"
+            BadMath          "${REGEX_BadMath}"
+            PrivateCtor      "${REGEX_PrivateCtor}"
+        END_CASE_PASS_REGULAR_EXPRESSION
+    )
+
+All the heavy lifting inside a test file is done by the beautiful GoogleTest
+C++ unit test framework. We just want to add a little layer on top, with
+scientific computing as the main target application.
 
 - TriBITS dependency management wrapper around Googletest.
 - Support for Fortran unit testing (with same style/feel as C++)
@@ -27,7 +136,7 @@ computing as the main target application.
 - Support for additional comparison macros, such as vector comparisons
   or relative differences.
 
-In the end, t123AddTest will call
+In the end, t123TestFile will call
 `TRIBITS_ADD_EXECUTABLE_AND_TEST <https://tribits.org/doc/TribitsDevelopersGuide.html#tribits-add-executable-and-test>`_,
 so the possibilities are endless.
 
@@ -73,16 +182,14 @@ functionality on the Fortran side.
 To Do
 -----
 
-Testing123_ is not quite ready for prime time. The MPI component is not yet
-enabled and the Fortran support only exists for the ``EXPECT_EQ`` macro.
+Testing123_ is not quite ready for prime time. The MPI component is not full
+enabled and the Fortran support could use more work.
 
 - C++ and Fortran
     - Enable MPI (starts with BootsOnTheGround_)
 - Fortran only
-    - Other ``EXPECT_*`` macros like ``EXPECT_LE, EXPECT_LT, ...``
     - Fix ``ASSERT_*`` macros to halt the program.
     - Document how exactly Fortran was hacked (it's a good story).
-    - Extend macro definitions to handle more than 10 test cases.
     - Fix Fortran literal strings with double quotes. ``EXPECT_EQ("a","a")``
       bombs because the C preprocessor converts ``"a"`` to ``"\"a\""`` but Fortran does
       not understand that kind of escape ``\"`` instead using ``""``. The
@@ -124,11 +231,8 @@ extra baggage. Note the ``src`` directory at the end. This is the location
 of the CMakeLists.txt file corresponding to the **package**, not the
 **project** CMakeLists.txt which is at the root level.
 
-See Template123_ for a minimal skeleton repo of a Testing123-enabled project.
-
 .. _CMake: https://cmake.org/
 .. _TriBITS: https://tribits.org
 .. _BootsOnTheGround: http://github.com/wawiesel/BootsOnTheGround
 .. _Testing123: http://github.com/wawiesel/Testing123
-.. _Template123: http://github.com/wawiesel/Template123
 
