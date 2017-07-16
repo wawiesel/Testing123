@@ -11,12 +11,12 @@ CMake_/TriBITS_ unit testing for C++/Fortran
 Testing123 provides a ``t123TestFile`` CMake macro for a declaring a "test
 file". A "test file" can contain:
 
-  - tests with GoogleTest_ macros in C++
-  - tests with GoogleTest_-like macros in Fortran
-  - tests which pass/fail based on the return code (zero/non-zero)
-  - tests which pass/fail if STDOUT matches something
-  - tests to confirm a code block compiles
-  - tests to confirm a code block does not compile
+- tests with GoogleTest_ macros in C++
+- tests with GoogleTest_-like macros in Fortran
+- tests which pass/fail based on the return code (zero/non-zero)
+- tests which pass/fail if STDOUT matches something
+- tests to confirm a code block compiles
+- tests to confirm a code block does not compile
 
 
 your/test/CMakeLists.txt
