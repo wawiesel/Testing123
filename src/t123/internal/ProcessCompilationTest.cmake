@@ -2,6 +2,7 @@
 MACRO( t123ProcessRegexList REGEX_BASE TEST_CASE CASE_REGEX REGEX_LIST)
   SET(regex_list "${REGEX_BASE}")
   # Macro arguments are NOT variables so we need to set local to proceed.
+  MESSAGE(STATUS "CASE_REGEX=${CASE_REGEX}")
   SET(case_regex "${CASE_REGEX}")
   LIST(LENGTH case_regex len)
   IF( "${len}" GREATER 0 )
@@ -17,7 +18,8 @@ MACRO( t123ProcessRegexList REGEX_BASE TEST_CASE CASE_REGEX REGEX_LIST)
       ENDIF()
     ENDFOREACH()
   ENDIF()
-  SET(${REGEX_LIST} "${regex_list}")
+  # // have to be used to separate the REGEX
+  STRING(REPLACE "//" ";" ${REGEX_LIST} "${regex_list}" )
 ENDMACRO()
 
 # Process the test file as a compilation test.

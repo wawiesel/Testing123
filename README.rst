@@ -147,9 +147,11 @@ the various tests.
     #
     #ENDIF()
     # 2) Just add the error message from other compilers as another one in the lists.
-    SET( REGEX_VectorNotDefined "undeclared identifier 'std';‘vector’ is not a member of ‘std’" )
+    # Note, cannot use ; to separate values because that would make one long list
+    # out of everything in a CASE_*_REGULAR_EXPRESSION.
+    SET( REGEX_VectorNotDefined "undeclared identifier 'std'//‘vector’ is not a member of ‘std’" )
     SET( REGEX_BadMath "expected (primary-)?expression" )
-    SET( REGEX_PrivateCtor "private constructor;is private" )
+    SET( REGEX_PrivateCtor "private constructor//is private" )
 
     # This code will not compile, so it's natural state is failure.
     # So to make it a stronger test, we will turn it into a "passing" test
@@ -166,7 +168,6 @@ the various tests.
         END_CASE_FAIL_REGULAR_EXPRESSION
         WILL_FAIL
     )
-
 
 The output of ``ctest`` would look something like this.
 
