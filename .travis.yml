@@ -86,7 +86,7 @@ script:
     #the configure needs this line suppression strategy
     - stdbuf -oL cmake .. 2>stderr.log |  grep --line-buffered '\[BootsOnTheGround\]\|\[hunter\]\|%\]'
     - cmake --build .
-    - ctest -VV
+    - ctest
 
 cache: ccache
 

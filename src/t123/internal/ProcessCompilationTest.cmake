@@ -25,6 +25,10 @@ ENDMACRO()
 # Process the test file as a compilation test.
 MACRO( t123ProcessCompilationTest TEST_FILE LANG TEST_NAME TEST_CASE CASE_PASS_REGEX CASE_FAIL_REGEX)
 
+  # For some reason, versions less than 3.6 produce erratic behavior with these
+  # compilation failure tests.
+  CMAKE_MINIMUM_REQUIRED(VERSION 3.6)
+
   # Process WILL_FAIL flag.
   SET(options WILL_FAIL)
   SET(one_value_args PASS_REGULAR_EXPRESSION FAIL_REGULAR_EXPRESSION)

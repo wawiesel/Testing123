@@ -81,6 +81,7 @@ MACRO( t123TestFiles )
           #--------------------------------------------------------------------
           # Add a compile test for each case.
           IF( do_test_compile )
+            SET(test_list)
             FOREACH( case ${case_list} )
               t123ProcessCompilationTest(
                 "${output_test_file}"
@@ -91,7 +92,13 @@ MACRO( t123TestFiles )
                 "${T123_TF_CASE_FAIL_REGULAR_EXPRESSION}"
                 ${T123_TF_UNPARSED_ARGUMENTS}
               )
+              LIST(APPEND test_list "${PACKAGE_NAME}_${test_name}.${case}")
             ENDFOREACH()
+            # Do not allow cases in the same suite to run in parallel.
+            SET_TESTS_PROPERTIES(${test_list}
+              PROPERTIES
+                RUN_SERIAL TRUE
+            )
           #--------------------------------------------------------------------
           # Add normal Tribits test.
           ELSE()
