@@ -1,7 +1,7 @@
-#include "t123/TestExe.hh"
+#include "t123/TestFile.hh"
 
 int main( int argc, char **argv )
 {
-    t123::TestExe::init( argc, argv );
+    t123::TestFile::init( argc, argv );
     return RUN_ALL_TESTS();
 }

@@ -1,6 +1,6 @@
-module tstTestExe_M
+module tstTestFile_M
 
-#include "t123/TestExe.f90i"
+#include "t123/TestFile.f90i"
 
 implicit none
 
@@ -22,7 +22,7 @@ TEST( Expect, Scalars )
 ENDTEST
 
 ! Test basic assert on scalar values: string, int, double, float.
-TEST( Expect, Scalars )
+TEST( Assert, Scalars )
 
     ! Reference value first, test value second.
     ASSERT_EQ( 700, 700 )
@@ -54,7 +54,7 @@ END TEST
 end module
 
 program main
-use tstTestExe_M
+use tstTestFile_M
 !
 RUN_ALL_TESTS()
 !

@@ -1,7 +1,7 @@
 #include "c_linkage.h"
-#include "t123/TestExe.hh"
+#include "t123/TestFile.hh"
 
-void t123_TestExe_c_addTestPartResult( const char* file,
+void t123_TestFile_c_addTestPartResult( const char* file,
                                        int line,
                                        int k,
                                        const char* refVariable,
@@ -10,7 +10,7 @@ void t123_TestExe_c_addTestPartResult( const char* file,
                                        const char* testValue,
                                        const char* compareOper )
 {
-    t123::TestExe::addTestPartResult( file,
+    t123::TestFile::addTestPartResult( file,
                                       line,
                                       k,
                                       refVariable,
@@ -20,19 +20,19 @@ void t123_TestExe_c_addTestPartResult( const char* file,
                                       compareOper );
 }
 
-void t123_TestExe_c_addTest( void ( *test_function )(),
+void t123_TestFile_c_addTest( void ( *test_function )(),
                              const char* file,
                              int line,
                              const char* test_case_name,
                              const char* test_name )
 {
-    t123::TestExe::addTest(
+    t123::TestFile::addTest(
         test_function, file, line, test_case_name, test_name );
 }
 
-void t123_TestExe_c_init( int argc, char** argv )
+void t123_TestFile_c_init( int argc, char** argv )
 {
-    t123::TestExe::init( argc, argv );
+    t123::TestFile::init( argc, argv );
 }
 
-int t123_TestExe_c_finish() { return t123::TestExe::finish(); }
+int t123_TestFile_c_finish() { return t123::TestFile::finish(); }

@@ -1,17 +1,17 @@
 !This file is to be INCLUDED in a test file.
 !
-!#include "t123/TestExe.f90i"
+!#include "t123/TestFile.f90i"
 !
-!It uses the TestExe module which contains
+!It uses the TestFile module which contains
 !Fortran data structures for the test excecutation, as
 !well as further includes of important macros and
 !special test definition macros.
 !
 
-use t123_TestExe
+use t123_TestFile
 
-#ifndef t123_TestExe_f90i_IN
-#define t123_TestExe_f90i_IN
+#ifndef t123_TestFile_f90i_IN
+#define t123_TestFile_f90i_IN
 
 #define _M_CAT(a, ...) _M_PRIMITIVE_CAT(a, __VA_ARGS__)
 #define _M_PRIMITIVE_CAT(a, ...) a ## __VA_ARGS__
@@ -299,7 +299,7 @@ use t123_TestExe
 recursive subroutine _M_CAT(Test_,i)();;; \
 logical,save :: register = .true.;;;\
 if( register )then;;; \
-call t123_TestExe_addTest(_M_CAT(Test_,i),__FILE__,__LINE__,#A,#B);;; \
+call t123_TestFile_addTest(_M_CAT(Test_,i),__FILE__,__LINE__,#A,#B);;; \
 register = .false.;;; \
 else;;; \
 call _M_CAT(InternalTest_,i)();;; \
@@ -315,14 +315,14 @@ subroutine _M_CAT(InternalTest_,i)();;;\
 #undef RUN_ALL_TESTS
 
 #define RUN_ALL_TESTS() \
-call t123_TestExe_init();;;\
+call t123_TestFile_init();;;\
 _M_EVAL(_M_REPEAT(__COUNTER__, _M_LOOP, ~));;;\
-call t123_TestExe_finish();;;\
+call t123_TestFile_finish();;;\
 if( t123_RETURN_CODE/=0 )STOP 1
 
 #define _M_MACRO_SWITCH(_1,_2,_3,NAME,...) NAME
 
-#define EXPECT_OR_ASSERT(OPER,FATAL,ref,test,msg) t123_LAST_TEST_EVAL=(ref OPER test); if( .not.t123_LAST_TEST_EVAL )call t123_TestExe_addTestPartResult(__FILE__,__LINE__,#ref,t123_printToString(ref),#test,t123_printToString(test),#OPER,FATAL,msg)
+#define EXPECT_OR_ASSERT(OPER,FATAL,ref,test,msg) t123_LAST_TEST_EVAL=(ref OPER test); if( .not.t123_LAST_TEST_EVAL )call t123_TestFile_addTestPartResult(__FILE__,__LINE__,#ref,t123_printToString(ref),#test,t123_printToString(test),#OPER,FATAL,msg)
 
 !!!!!!!!!!!!!!!!!!!
 !!! EQUALS (EQ) !!!
