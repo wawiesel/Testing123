@@ -1,5 +1,5 @@
-botgProjectContents(
-  BootsOnTheGround external/BootsOnTheGround/src  ST
-  Testing123       src                            PT
+botgPackagesList(
+# name             path        test_level
+  Testing123       src         PT
 )
 

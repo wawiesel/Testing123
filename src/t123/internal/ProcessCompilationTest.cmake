@@ -2,7 +2,6 @@
 MACRO( t123ProcessRegexList REGEX_BASE TEST_CASE CASE_REGEX REGEX_LIST)
   SET(regex_list "${REGEX_BASE}")
   # Macro arguments are NOT variables so we need to set local to proceed.
-  MESSAGE(STATUS "CASE_REGEX=${CASE_REGEX}")
   SET(case_regex "${CASE_REGEX}")
   LIST(LENGTH case_regex len)
   IF( "${len}" GREATER 0 )
@@ -84,9 +83,6 @@ MACRO( t123ProcessCompilationTest TEST_FILE LANG TEST_NAME TEST_CASE CASE_PASS_R
   ENDIF()
 
   # Modify the test properties to check failure.
-MESSAGE(STATUS "pass_regex=${pass_regex}")
-MESSAGE(STATUS "fail_regex=${fail_regex}")
-
   SET_TESTS_PROPERTIES( "${full_test_name}"
     PROPERTIES
       WILL_FAIL ${T123_PCT_WILL_FAIL}
