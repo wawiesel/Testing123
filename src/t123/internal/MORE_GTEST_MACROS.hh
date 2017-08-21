@@ -18,12 +18,12 @@ do {\
     }\
 } while(false)
 
-#define EXPECTORASSERT_APPROX(a,b,tol)\
+#define EXPECTORASSERT_APPROX(name,a,b,tol)\
 do {\
     name##_NEAR(a,b,std::abs(tol*a));\
 } while(false)
 
-#define EXPECTORASSERT_VEC_APPROX(a,b,tol)\
+#define EXPECTORASSERT_VEC_APPROX(name,a,b,tol)\
 do {\
     name##_EQ(a.size(),b.size());\
     for(size_t i=0; i<a.size(); ++i)\
