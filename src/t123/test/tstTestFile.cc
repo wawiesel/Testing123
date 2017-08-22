@@ -12,4 +12,6 @@ TEST( Expect, Scalars )
     EXPECT_NE( "", "done" );
     EXPECT_LE( 1, 1 );
     EXPECT_GE( 4.1, 3.5 );
+    EXPECT_NEAR( 4.1, 4.0 , 0.1 ); //0.1 abstol
+    EXPECT_APPROX( 1.0, 1.01, 0.011 ); //1.1% reltol
 }
