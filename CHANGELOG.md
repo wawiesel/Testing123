@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [unreleased] - YYYY-MM-DD
 
 ### Added
-- none.
+- vector macros for: EXPECT_VEC_EQ, EXPECT_VEC_NEAR, and EXPECT_VEC_APPROX
 
 ### Changed
 - none.
