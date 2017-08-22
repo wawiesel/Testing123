@@ -1,3 +1,5 @@
+#include <cmath> /*std::abs*/
+
 #define EXPECTORASSERT_VEC_EQ(name,a,b)\
 do {\
     name##_EQ(a.size(),b.size());\
