@@ -27,7 +27,7 @@ TEST( Expect, Vector )
     }
     {
         std::vector<double> test{0.11,0.21};
-        EXPECT_VEC_NEAR( ref, test, 0.01 ); //0.01 abstol
-        EXPECT_VEC_APPROX( ref, test, 0.08 ); //11% reltol
+        EXPECT_VEC_NEAR( ref, test, 0.011 ); //0.011 abstol
+        EXPECT_VEC_APPROX( ref, test, 0.11 ); //11% reltol
     }
 }
