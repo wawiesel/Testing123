@@ -43,8 +43,7 @@ install:
         mkdir cmake && travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
         export PATH=${DEPS_DIR}/cmake/bin:${PATH}
       elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-        brew --version
-        brew search gfortran
+        export HOMEBREW_GITHUB_API_TOKEN=57691b3cae8ab97b1fe94c5ddcb0b8fe1d16b1b8
         brew update
       fi
     - cmake --version
