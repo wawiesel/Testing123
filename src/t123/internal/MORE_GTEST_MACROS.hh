@@ -1,10 +1,18 @@
 #include <cmath> /*std::abs*/
+#include <algorithm> /*std::min*/
+//-----------------------------------------------------------------------------
+
+template <typename T1, typename T2>
+inline
+T1 MIN_SIZE_INTEGER( T1 n1, T2 n2 ) {
+    return std::min(n1,static_cast<T1>(n2));
+}
 
 //-----------------------------------------------------------------------------
 
-template <typename T>
+template <typename T1, typename T2>
 inline
-::testing::AssertionResult FUNCTION_COMPARE_VEC_EQ(const std::string& ref_name, const T& ref, const std::string& test_name, const T& test) {
+::testing::AssertionResult FUNCTION_COMPARE_VEC_EQ(const std::string& ref_name, const T1& ref, const std::string& test_name, const T2& test) {
     std::stringstream msg;
     bool pass = true;
 
@@ -18,7 +26,7 @@ inline
     }
 
     //test any elements we can
-    for( size_t i=0; i<std::min(ref.size(),test.size()); ++i)
+    for( size_t i=0; i<MIN_SIZE_INTEGER(ref.size(),test.size()); ++i)
     {
         //use equality operator == instead of != to catch more custom comparison
         //operators that may not have != implemented
@@ -59,7 +67,7 @@ inline
     }
 
     //test any elements we can
-    for( size_t i=0; i<std::min(ref.size(),test.size()); ++i)
+    for( size_t i=0; i<MIN_SIZE_INTEGER(ref.size(),test.size()); ++i)
     {
         //absolute tolerance
         if( std::abs(ref[i]-test[i]) > std::abs(tol) )
@@ -100,7 +108,7 @@ inline
     }
 
     //test any elements we can
-    for( size_t i=0; i<std::min(ref.size(),test.size()); ++i)
+    for( size_t i=0; i<MIN_SIZE_INTEGER(ref.size(),test.size()); ++i)
     {
         //relative tolerance
         if( std::abs(ref[i]-test[i]) > std::abs(tol*ref[i]) )
